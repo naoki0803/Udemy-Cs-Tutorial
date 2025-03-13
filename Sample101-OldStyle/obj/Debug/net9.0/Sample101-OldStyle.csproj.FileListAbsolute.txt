@@ -1,0 +1,14 @@
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101-OldStyle/obj/Debug/net9.0/Sample101-OldStyle.GeneratedMSBuildEditorConfig.editorconfig
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101-OldStyle/obj/Debug/net9.0/Sample101-OldStyle.AssemblyInfoInputs.cache
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101-OldStyle/obj/Debug/net9.0/Sample101-OldStyle.AssemblyInfo.cs
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101-OldStyle/obj/Debug/net9.0/Sample101-OldStyle.csproj.CoreCompileInputs.cache
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101-OldStyle/bin/Debug/net9.0/Sample101-OldStyle
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101-OldStyle/bin/Debug/net9.0/Sample101-OldStyle.deps.json
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101-OldStyle/bin/Debug/net9.0/Sample101-OldStyle.runtimeconfig.json
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101-OldStyle/bin/Debug/net9.0/Sample101-OldStyle.dll
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101-OldStyle/bin/Debug/net9.0/Sample101-OldStyle.pdb
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101-OldStyle/obj/Debug/net9.0/Sample101-OldStyle.dll
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101-OldStyle/obj/Debug/net9.0/refint/Sample101-OldStyle.dll
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101-OldStyle/obj/Debug/net9.0/Sample101-OldStyle.pdb
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101-OldStyle/obj/Debug/net9.0/Sample101-OldStyle.genruntimeconfig.cache
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101-OldStyle/obj/Debug/net9.0/ref/Sample101-OldStyle.dll

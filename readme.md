@@ -88,6 +88,14 @@ NG `Console.WriteLine('HelloWorld.');` // : error CS1012: 文字リテラルに�
 
 ## エディタでの実行方法
 
+### 単発で実行する場合
+
 ```
 $ dotnet run
+```
+
+### 保存時に自動的に実行する(nodemon のような)
+
+```
+$ dotnet watch run
 ```

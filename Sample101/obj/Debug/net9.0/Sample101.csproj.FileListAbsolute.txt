@@ -1,0 +1,15 @@
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101/bin/Debug/net9.0/Sample101
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101/bin/Debug/net9.0/Sample101.deps.json
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101/bin/Debug/net9.0/Sample101.runtimeconfig.json
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101/bin/Debug/net9.0/Sample101.dll
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101/bin/Debug/net9.0/Sample101.pdb
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101/obj/Debug/net9.0/Sample101.GeneratedMSBuildEditorConfig.editorconfig
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101/obj/Debug/net9.0/Sample101.AssemblyInfoInputs.cache
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101/obj/Debug/net9.0/Sample101.AssemblyInfo.cs
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101/obj/Debug/net9.0/Sample101.csproj.CoreCompileInputs.cache
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101/obj/Debug/net9.0/Sample101.sourcelink.json
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101/obj/Debug/net9.0/Sample101.dll
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101/obj/Debug/net9.0/refint/Sample101.dll
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101/obj/Debug/net9.0/Sample101.pdb
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101/obj/Debug/net9.0/Sample101.genruntimeconfig.cache
+/Users/shiratorinaoki/projects/Udemy-C#-Tutorial/Sample101/obj/Debug/net9.0/ref/Sample101.dll

@@ -99,3 +99,26 @@ $ dotnet run
 ```
 $ dotnet watch run
 ```
+
+## 変数宣言
+
+変数宣言は `type 変数名 = 値;` と記述をする
+※ 同一 type であれば複数の変数も宣言可能
+`type 変数名1 = 値, 変数名2 = 値, 変数名3 = 値;`
+
+type の種類一例
+
+-   int 整数型
+-   double 小数点
+-   string 文字型
+
+```
+int number;
+int numberVal = 777;
+double doubleNumber = 777.777;
+string name = "Suzuki Taro"
+
+同一typeであれば複数変数を宣言可能
+
+string firstName="鈴木", lastName="太郎";
+```

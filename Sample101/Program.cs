@@ -27,3 +27,19 @@ Console.WriteLine(a);
 Console.WriteLine(firstName, lastName);
 Console.WriteLine(avg);
 
+
+/* キャスト
+異なる type 同士で変数を代入する際に利用する
+*/
+
+int intNum;
+// intNum = 1.23;  // intにdoubleの代入はキャストしないとエラーになる
+intNum = (int)1.23;
+Console.WriteLine(intNum); //1.23 は 1 として整数で代入される
+
+double doubleNum;
+doubleNum = 1;  // これは代入可能で 1 として代入される。
+Console.WriteLine(doubleNum);
+
+
+/**/

@@ -122,3 +122,78 @@ string name = "Suzuki Taro"
 
 string firstName="鈴木", lastName="太郎";
 ```
+
+## コードフォーマット関連
+
+以下 URL に記載しているサンプルフォーマットテンプレート
+https://tech-blog.cloud-config.jp/2020-12-18-visual-studio-code-for-csharp-development/
+
+~/.omnisharp/omnisharp.json に記述するか、プロジェクトのルートに記述する(.omnisharp/omnisharp.json)
+
+```omnisharp.json
+{
+    "FormattingOptions": {
+        "EnableEditorConfigSupport": false,
+        "NewLine": "\n",
+        "UseTabs": false,
+        "TabSize": 2,
+        "IndentationSize": 2,
+        "SpacingAfterMethodDeclarationName": false,
+        "SpaceWithinMethodDeclarationParenthesis": false,
+        "SpaceBetweenEmptyMethodDeclarationParentheses": false,
+        "SpaceAfterMethodCallName": false,
+        "SpaceWithinMethodCallParentheses": false,
+        "SpaceBetweenEmptyMethodCallParentheses": false,
+        "SpaceAfterControlFlowStatementKeyword": true,
+        "SpaceWithinExpressionParentheses": false,
+        "SpaceWithinCastParentheses": false,
+        "SpaceWithinOtherParentheses": false,
+        "SpaceAfterCast": false,
+        "SpacesIgnoreAroundVariableDeclaration": false,
+        "SpaceBeforeOpenSquareBracket": false,
+        "SpaceBetweenEmptySquareBrackets": false,
+        "SpaceWithinSquareBrackets": false,
+        "SpaceAfterColonInBaseTypeDeclaration": true,
+        "SpaceAfterComma": true,
+        "SpaceAfterDot": false,
+        "SpaceAfterSemicolonsInForStatement": true,
+        "SpaceBeforeColonInBaseTypeDeclaration": true,
+        "SpaceBeforeComma": false,
+        "SpaceBeforeDot": false,
+        "SpaceBeforeSemicolonsInForStatement": false,
+        "SpacingAroundBinaryOperator": "single",
+        "IndentBraces": false,
+        "IndentBlock": true,
+        "IndentSwitchSection": true,
+        "IndentSwitchCaseSection": true,
+        "IndentSwitchCaseSectionWhenBlock": true,
+        "LabelPositioning": "oneLess",
+        "WrappingPreserveSingleLine": true,
+        "WrappingKeepStatementsOnSingleLine": true,
+        "NewLinesForBracesInTypes": true,
+        "NewLinesForBracesInMethods": true,
+        "NewLinesForBracesInProperties": true,
+        "NewLinesForBracesInAccessors": true,
+        "NewLinesForBracesInAnonymousMethods": true,
+        "NewLinesForBracesInControlBlocks": true,
+        "NewLinesForBracesInAnonymousTypes": true,
+        "NewLinesForBracesInObjectCollectionArrayInitializers": true,
+        "NewLinesForBracesInLambdaExpressionBody": true,
+        "NewLineForElse": true,
+        "NewLineForCatch": true,
+        "NewLineForFinally": true,
+        "NewLineForMembersInObjectInit": true,
+        "NewLineForMembersInAnonymousTypes": true,
+        "NewLineForClausesInQuery": true,
+        "OrganizeImports": true
+    },
+    "RoslynExtensionsOptions": {
+        "documentAnalysisTimeoutMs": 10000,
+        "enableDecompilationSupport": true,
+        "enableImportCompletion": true,
+        "enableAnalyzersSupport": true,
+        "locationPaths": ["//path_to/code_actions.dll"]
+    }
+}
+
+```

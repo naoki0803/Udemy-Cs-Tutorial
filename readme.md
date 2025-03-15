@@ -8,42 +8,6 @@
 
 new 第二引数にどのようなアプリケーションを作成するかを記述する
 
-```
-$ dotnet new --help
-
-Description:
-  .NET CLI のテンプレート インスタンス化コマンド。
-
-使用法:
-  dotnet new [<template-short-name> [<template-args>...]] [options]
-  dotnet new [command] [options]
-
-引数:
-  <template-short-name>  作成するテンプレートの短い名前。
-  <template-args>        使用するテンプレート固有のオプション。
-
-オプション:
-  -o, --output <output>    生成された出力を配置する場所。
-  -n, --name <name>        作成される出力の名前です。名前を指定しない場合は、出力ディレクトリの名前が使用されます。
-  --dry-run                指定されたコマンドラインがテンプレートを実行した場合に発生する結果の概要を表示します。
-  --force                  既存のファイルが変更された場合でも、コンテンツを強制的に生成します。
-  --no-update-check        テンプレートをインスタンス化する場合に、テンプレート パッケージの更新の確認を無効にします。
-  --project <project>      コンテキストの評価に使用する必要があるプロジェクトです。
-  -v, --verbosity <LEVEL>  詳細レベルを設定します。許可されている値: q[uiet]、m[inimal]、n[ormal]、diag[nostic]。 [default: normal]
-  -d, --diagnostics        診断出力を有効にします。
-  -?, -h, --help           コマンド ラインのヘルプを表示します。
-
-コマンド:
-  create <template-short-name> <template-args>  指定された短い名前のテンプレートをインスタンス化します。'dotnet new <template name>' のエイリアス。
-  install <package>                             テンプレート パッケージをインストールします。
-  uninstall <package>                           テンプレート パッケージをアンインストールします。
-  update                                        更新のために現在インストールされているテンプレート パッケージを確認し、更新プログラムをインストールしてください。
-  search <template-name>                        NuGet.org 上のテンプレートを検索します。
-  list <template-name>                          指定されたテンプレート名を含むテンプレートを一覧表示します。名前を指定しない場合、すべてのテンプレートが一覧表示されます。
-  details <package-identifier>                  指定されたテンプレート パッケージの詳細情報を提供します。
-                                                      このコマンドは、パッケージがローカルにインストールされているかどうかを確認します。パッケージが見つからなかった場合は、構成済みの NuGet フィードが検索されます。
-```
-
 ### 古いバージョンで作成する方法
 
 ```
@@ -75,6 +39,16 @@ class Program
 }
 ```
 
+### help の確認
+
+```
+
+$ dotnet new --help
+
+```
+
+確認したい引数や、オプションの後ろで `--help` を記述する
+
 ## コメントアウト
 
 javascript と同じく // でコメントアウト
@@ -100,6 +74,31 @@ $ dotnet run
 $ dotnet watch run
 ```
 
+## Console.WriteLine の利用方法
+
+### 基本的な利用方法
+
+```
+Console.WriteLine("改行して");
+Console.WriteLine("結果を出力");
+// 改行して
+// 結果を出力
+
+Console.Write("改行なし");
+Console.Write("で出力");
+// 改行なしで出力
+```
+
+### 文字列補完 (javascript でいうテンプレートリテラル)
+
+```
+string firstName = "鈴木";
+string lastName = "太郎";
+Console.WriteLine($"私は、{firstName}{lastName}です");
+// 私は鈴木たろうです
+
+```
+
 ## 変数宣言
 
 変数宣言は `type 変数名 = 値;` と記述をする
@@ -122,6 +121,8 @@ string name = "Suzuki Taro"
 
 string firstName="鈴木", lastName="太郎";
 ```
+
+## ユーザーの入力の取得
 
 ## コードフォーマット関連
 

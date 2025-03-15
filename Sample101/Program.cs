@@ -42,4 +42,13 @@ doubleNum = 1;  // これは代入可能で 1 として代入される。
 Console.WriteLine(doubleNum);
 
 
-/**/
+/* ユーザーの入力による代入
+
+*/
+
+string inputValue1, inputValue2;
+Console.Write("苗字を入力してください => ");
+inputValue1 = Console.ReadLine();
+Console.Write("名字を入力してください => ");
+inputValue2 = Console.ReadLine();
+Console.WriteLine($"あなたの名前は{inputValue1} {inputValue2}:です");

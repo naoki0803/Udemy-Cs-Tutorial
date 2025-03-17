@@ -4,12 +4,20 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("{0} + {1} = {2}", 5, 5,1);
-
-        // Console.WriteLine("Hello, World!");
-        // Console.WriteLine(10+3);
-        // Console.WriteLine(10-3);
-        // Console.WriteLine(10/3);
-        // Console.WriteLine(10%3);
+        /* if 分
+        */
+        var fruit = "いちご";
+        if (fruit == "apple")
+        {
+            Console.WriteLine("りんごです");
+        }
+        else if (fruit == "banana")
+        {
+            Console.WriteLine("バナナです");
+        }
+        else
+        {
+            Console.WriteLine("りんごか、バナナではありません");
+        }
     }
 }

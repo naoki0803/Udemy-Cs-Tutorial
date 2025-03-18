@@ -138,7 +138,7 @@ inputValue2 = Console.ReadLine();
 Console.WriteLine($"あなたの名前は{inputValue1} {inputValue2}:です");
 ```
 
-## if 分
+## if 文
 基本構文は JavaScript と変わらない
 
 ただし、cs は静的型付け言語なので、等価演算子は `===` ではなく、`==` を利用する
@@ -162,10 +162,37 @@ if (obj == null) { /* 処理 */ }
 // 必要な場合はNullValueHandling.Ignoreでプロパティを省略可能[7]
 ```
 
+## switch 文
+基本的な記述方法は JavaScript と同じ
+※注意点として、フォールスルーの処理は構文エラーになる
+
+```
+int num = int.Parse(Console.ReadLine());
+switch (num) {
+    case 1:
+    case 9: // caseを2つ指定することも可能
+        Console.WriteLine("1 or 9 です");
+        break;
+    case 2:
+        Console.WriteLine("2 です");
+        break;
+    case 3:
+        Console.WriteLine("3 です");
+        break;
+    default:
+        Console.WriteLine("1から3 もしくは 9 の整数を入力してください。");
+        break;
+}
+```
 
 
 
 ## コードフォーマット関連
+
+omnisharpは現状利用しておらず、C# Div Kit 内の機能でフォーマットしていそうだが、その設定実体がどこかがわからない。
+
+.editorconfig を記述しても、記述がうまく反映しない。
+原因不明。。。
 
 以下 URL に記載しているサンプルフォーマットテンプレート
 https://tech-blog.cloud-config.jp/2020-12-18-visual-studio-code-for-csharp-development/

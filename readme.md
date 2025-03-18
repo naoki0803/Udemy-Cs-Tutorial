@@ -124,6 +124,47 @@ string firstName="鈴木", lastName="太郎";
 
 ## ユーザーの入力の取得
 
+Console.ReadLine();を利用する事で、実行時は該当行で処理が一次停止し、
+ユーザーの入力が完了(Enter 押下)されると、処理が進むようになる。
+
+戻り値として、ユーザーの入力した値が`文字列`として取得できる
+
+```cs
+string? inputValue1, inputValue2;
+Console.Write("苗字を入力してください => ");
+inputValue1 = Console.ReadLine();
+Console.Write("名字を入力してください => ");
+inputValue2 = Console.ReadLine();
+Console.WriteLine($"あなたの名前は{inputValue1} {inputValue2}:です");
+```
+
+## if 分
+基本構文は JavaScript と変わらない
+
+ただし、cs は静的型付け言語なので、等価演算子は `===` ではなく、`==` を利用する
+また、truthy / falsy という概念は cs にはなく、空文字やnullの判定は明示的なメソッド呼び出しが必要
+※API連携時にはnullとundefinedの扱いを明確にする必要がある。
+
+**空文字の扱い**	""はfalse	String.IsNullOrEmpty()で判定
+**null/undefined**	両者ともfalse	nullのみ存在（undefinedはなし）
+**コレクションの扱い**	空配列[]はtrue	空コレクションはnullでないがコンテナ自体のチェックが必要
+
+```
+csharp
+// 空文字チェック
+if (String.IsNullOrEmpty(text)) { /* 処理 */ }
+
+// nullチェック（オブジェクトの場合）
+if (obj == null) { /* 処理 */ }
+
+// JSONデシリアライズ時のnull扱い
+// Newtonsoft.Jsonの場合、nullはundefinedとして扱われない
+// 必要な場合はNullValueHandling.Ignoreでプロパティを省略可能[7]
+```
+
+
+
+
 ## コードフォーマット関連
 
 以下 URL に記載しているサンプルフォーマットテンプレート

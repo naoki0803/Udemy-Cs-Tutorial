@@ -12,6 +12,28 @@
 2+1=3 2+2=4 2+3=5 
 */
 
+/*
+while と do while
+while は先に条件を判定する
+do while は条件にかかわらず1度実行後に条件判定をする
+*/
+int num = 1;
+while (num <= 5)
+{
+    Console.Write($"{num} ");
+    num++;
+}
+Console.WriteLine();
+
+
+int l = 1100;
+do
+{
+    Console.WriteLine($"{l} ここがlです");
+    l++;
+
+} while (l <= 5);
+
 int[] arr = { 1, 2, 3, 4, 5 };
 
 var newArr = arr.Select(a => a + 1).ToArray();

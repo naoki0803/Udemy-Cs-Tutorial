@@ -72,3 +72,68 @@ for (int i = 0; i < matrixArr.GetLength(0); i++)
 Console.WriteLine(); // 改行を追加
 
 
+
+// 練習問題1
+int[] array = new int[10];
+
+for (int i = 0; i < array.Length; i++)
+{
+    array[i] = i + 1;
+    Console.WriteLine($"a[{i}] = {i + 1}");
+}
+Console.WriteLine(string.Join(",", array));
+
+
+// int[] result =dr
+
+Console.WriteLine(string.Join(",", array.Select(
+    (a, idx) => array[idx] = idx + 1)
+    .ToArray()
+    )
+);
+// Console.WriteLine(string.Join(",", result));
+
+
+
+// 練習問題2
+double[] d = { 0.2, 1.4, -0.8 };
+for (int i = 0; i < d.Length; i++)
+{
+    Console.WriteLine($"a[{i}] = {d[i]}");
+}
+
+// 練習問題3
+
+Random rnd = new Random();
+int[] practiceArr = new int[10];
+
+for (int i = 0; i < practiceArr.Length; i++)
+{
+    practiceArr[i] = rnd.Next(1, 101);
+}
+
+Console.WriteLine(string.Join(",", practiceArr));
+Console.WriteLine(practiceArr.Sum());
+Console.WriteLine(practiceArr.Average());
+Console.WriteLine(practiceArr.Max());
+Console.WriteLine(practiceArr.Min());
+// 練習問題4
+int[,] arr99 = new int[9, 9];
+
+// for (int i = 0; i < arr99.GetLength(0); i++)
+// {
+//     for (int j = 0; j < arr99.GetLength(1); j++)
+//     {
+//         arr99[i, j] = j + 1;
+//     }
+// }
+for (int i = 0; i < arr99.GetLength(0); i++)
+{
+    for (int j = 0; j < arr99.GetLength(1); j++)
+    {
+        arr99[i, j] = (i + 1) * (j + 1);
+    }
+}
+
+// Console.WriteLine(string.Join(",", arr99));
+Console.WriteLine(string.Join(",", arr99.Cast<int>().Select(x => x.ToString())));

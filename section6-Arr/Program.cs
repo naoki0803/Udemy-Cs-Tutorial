@@ -36,10 +36,6 @@ Console.WriteLine($"配列の合計は: {sum}です。");
 Console.WriteLine($"配列の平均は: {avg}です。");
 
 
-
-
-
-
 string[] strings = { "ABC", "DEF", "GHI" };
 string[] newStrings = strings.Select(s => s + s).ToArray();
 Console.WriteLine(string.Join(",", newStrings));
@@ -59,3 +55,20 @@ foreach (int n in numbers)
 }
 
 Console.WriteLine(doubleNum);
+
+// 2次元配列
+
+int[,] matrixArr = { { 1, 2, 3, 4 }, { 4, 5, 6, 7 }, { 7, 8, 9, 10 } };
+Console.WriteLine(matrixArr.GetLength(0)); //行数 3
+Console.WriteLine(matrixArr.GetLength(1)); //列数 4
+
+for (int i = 0; i < matrixArr.GetLength(0); i++)
+{
+    for (int j = 0; j < matrixArr.GetLength(1); j++)
+    {
+        Console.Write($"{matrixArr[i, j]} ");
+    }
+}
+Console.WriteLine(); // 改行を追加
+
+

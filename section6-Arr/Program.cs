@@ -132,7 +132,9 @@ for (int i = 0; i < arr99.GetLength(0); i++)
     for (int j = 0; j < arr99.GetLength(1); j++)
     {
         arr99[i, j] = (i + 1) * (j + 1);
+        // Console.Write($"{arr99[i, j]} ");
     }
+    // Console.WriteLine();
 }
 
 // Console.WriteLine(string.Join(",", arr99));

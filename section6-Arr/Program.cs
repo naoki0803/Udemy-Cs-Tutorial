@@ -137,5 +137,10 @@ for (int i = 0; i < arr99.GetLength(0); i++)
     // Console.WriteLine();
 }
 
-// Console.WriteLine(string.Join(",", arr99));
+// // Console.WriteLine(string.Join(",", arr99));   // 2次元配列のままではConsole.WriteLine();での出力はできない
+
+// arr99.Cast<int>()で、一次元配列に変換し、
+// .Select(x => x.ToString()) で文字列に変換
+// 戻り値の文字列配列をJoinでカンマ区切りで出力している。
 Console.WriteLine(string.Join(",", arr99.Cast<int>().Select(x => x.ToString())));
+

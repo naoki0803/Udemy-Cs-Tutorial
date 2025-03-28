@@ -1,4 +1,7 @@
-﻿// using ConsoleApp1; // Person クラスが定義されている名前空間を追加
+﻿using ConsoleApp1; // Person クラスが定義されている名前空間を追加
+
+// using static Calc;
+// using static Person;
 
 // インスタンス化
 Person taro = new Person();
@@ -23,3 +26,9 @@ Console.WriteLine(taro.age);    // 40
 // class内で定義したメソッドで結果が表示される
 taro.ShowAgeAndName();   //名前:鈴木一郎 年齢:40
 
+
+Calc cal = new Calc();
+Console.WriteLine(cal.Add(1, 2));
+Console.WriteLine(cal.Add(1, 2, 3));
+// 4つ目の引数は存在しないため、コンパイルエラーになります。
+// Console.WriteLine(cal.Add(1, 2, 3, 4)); 

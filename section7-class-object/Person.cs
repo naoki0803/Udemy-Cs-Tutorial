@@ -1,4 +1,4 @@
-namespace ConsoleApp1;    // これを記述するとProgram.csと別の名前空間になるため、Program.csで using を記述する必要がある。
+namespace section7_class_object;    // これを記述するとProgram.csと別の名前空間になるため、Program.csで using を記述する必要がある。
 public class Person
 {
     public string name = "初期値太郎";

@@ -1,4 +1,4 @@
-﻿using ConsoleApp1; // Person クラスが定義されている名前空間を追加
+﻿using section7_class_object; // Person クラスが定義されている名前空間を追加
 
 // using static Calc;
 // using static Person;

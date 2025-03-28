@@ -10,7 +10,7 @@
     <!-- コードアナライザーを有効にする記述 
     https://zenn.dev/inuinu/articles/c60abf13d5f47a  
     -->
-    <EnableNETAnalyzers>false</EnableNETAnalyzers> 
+    <EnableNETAnalyzers>true</EnableNETAnalyzers> 
 
     <!-- コードアナライザーの判定強度 
     https://learn.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#AnalysisMode

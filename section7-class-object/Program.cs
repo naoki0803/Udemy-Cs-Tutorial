@@ -1,4 +1,4 @@
-﻿using section7_class_object; // Person クラスが定義されている名前空間を追加
+﻿using section7_class_object; // section7_class_object クラスが定義されている名前空間を追加
 
 // using static Calc;
 // using static Person;
@@ -32,3 +32,14 @@ Console.WriteLine(cal.Add(1, 2));
 Console.WriteLine(cal.Add(1, 2, 3));
 // 4つ目の引数は存在しないため、コンパイルエラーになります。
 // Console.WriteLine(cal.Add(1, 2, 3, 4)); 
+
+
+// コンストラクタ関数でkondをインスタンス化
+AccessModifiersPerson kondo = new AccessModifiersPerson("近藤", 20);
+
+// Nameプロパティの参照(getter)
+Console.WriteLine(kondo.Name);
+// Nameプロパティの変更(setter)
+kondo.Name = "kondo";
+
+Console.WriteLine(kondo.Name);

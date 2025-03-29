@@ -43,3 +43,14 @@ Console.WriteLine(kondo.Name);
 kondo.Name = "kondo";
 
 Console.WriteLine(kondo.Name);
+
+// コンストラクタ関数でAutoPropertyをインスタンス化
+AutoImplementProperty AutoProperty = new AutoImplementProperty("自動プロパティ君", 44);
+
+// Nameプロパティの参照(getter)
+Console.WriteLine(AutoProperty.Name);
+
+// AutoImplementPropertyの Name プロパティは、 private set; get; としており、変更ができない
+// AutoProperty.Name = "kondo";  // コンパイルエラーになる為コメントアウト
+
+Console.WriteLine(AutoProperty.Name);

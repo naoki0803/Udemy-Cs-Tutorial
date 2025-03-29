@@ -1,3 +1,5 @@
+test
+
 ## プロジェクトの作成方法
 
 ### 基本的な作成方法
@@ -231,10 +233,75 @@ arr[2] = 4.1;
 int[] matrixJagArr = { new int[]{1}, new int[] {2,2}, new int[] {3,3,3} }
 ```
 
+## namespace
 
+namespace が異なるファイルを利用する場合、呼び出し元の上部に`using`を記述することで、別の namespace のファイルを参照する事が可能になる。
 
+```cs
+using namespace名;
+```
 
+### トップレベルステートメント
 
+TODO: ざっくりは理解できたけど、他ファイルの読み込み等を含めると概念がいまだ理解できていない。
+[トップレベルステートメントのチュートリアル](https://learn.microsoft.com/ja-jp/dotnet/csharp/tutorials/top-level-statements)
+
+小規模なアプリケーションに向いている
+
+## Class
+
+### class の定義方法
+
+```cs
+public class ClassName
+{
+    // フィールド
+    private string name;
+    private int age;
+
+    // フィールドのセット
+    public void SetAgeAndName(string name, int age)
+    {
+        this.name = name;
+        this.age = age;
+    }
+
+    // フィールドの表示
+    public void ShowAgeAndName()
+    {
+        Console.WriteLine($"Nameは{Name},年齢は{Age}");
+    }
+
+    // コンストラクタ
+    public AccessModifiersPerson(string name, int age)
+    {
+        Name = name;
+        Age = age;
+    }
+
+    // プロパティのSetterとGetter
+    // SetterとGetterを定義することで、プロパティに対して外部からの編集/参照を定義できる。
+    public string Name
+    {
+        set { name = value; }
+        get { return name; }
+    }
+    public int Age
+    {
+        set { age = value; }
+        get { return age; }
+    }
+}
+
+```
+
+TODO: 違いを調べる
+
+-   フィールド
+-   プロパティ
+
+※基本的にはカプセル化を実施して、フェールドの値は外部から参照や変更ができないようにする。
+プロパティの `getter` と `setter` を用いてい、readonly にしたり、変更可能にしたりなどを設定する。
 
 ## コードフォーマット関連
 

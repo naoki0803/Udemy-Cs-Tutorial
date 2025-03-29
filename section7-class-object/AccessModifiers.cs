@@ -1,6 +1,6 @@
 namespace section7_class_object;
 
-public class AccessModifiers
+public class AccessModifiersPerson
 {
     // private装飾子が付与されているので、外部からフィールドへ直接アクセスできない。
     private string name;
@@ -14,9 +14,16 @@ public class AccessModifiers
     }
 
     // フィールドの表示
-    public void ShowAgeAndName(string name, int age)
+    public void ShowAgeAndName()
     {
-        Console.WriteLine($"{name}, {age}");
+        Console.WriteLine($"Nameは{Name},年齢は{Age}");
+    }
+
+    // コンストラクタ
+    public AccessModifiersPerson(string name, int age)
+    {
+        Name = name;
+        Age = age;
     }
 
     // プロパティのSetterとGetter

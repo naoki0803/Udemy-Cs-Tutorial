@@ -139,15 +139,16 @@ Console.WriteLine($"あなたの名前は{inputValue1} {inputValue2}:です");
 ```
 
 ## if 文
+
 基本構文は JavaScript と変わらない
 
 ただし、cs は静的型付け言語なので、等価演算子は `===` ではなく、`==` を利用する
-また、truthy / falsy という概念は cs にはなく、空文字やnullの判定は明示的なメソッド呼び出しが必要
-※API連携時にはnullとundefinedの扱いを明確にする必要がある。
+また、truthy / falsy という概念は cs にはなく、空文字や null の判定は明示的なメソッド呼び出しが必要
+※API 連携時には null と undefined の扱いを明確にする必要がある。
 
-**空文字の扱い**	""はfalse	String.IsNullOrEmpty()で判定
-**null/undefined**	両者ともfalse	nullのみ存在（undefinedはなし）
-**コレクションの扱い**	空配列[]はtrue	空コレクションはnullでないがコンテナ自体のチェックが必要
+**空文字の扱い** ""は false String.IsNullOrEmpty()で判定
+**null/undefined** 両者とも false null のみ存在（undefined はなし）
+**コレクションの扱い** 空配列[]は true 空コレクションは null でないがコンテナ自体のチェックが必要
 
 ```
 csharp
@@ -163,6 +164,7 @@ if (obj == null) { /* 処理 */ }
 ```
 
 ## switch 文
+
 基本的な記述方法は JavaScript と同じ
 ※注意点として、フォールスルーの処理は構文エラーになる
 
@@ -185,14 +187,13 @@ switch (num) {
 }
 ```
 
-
 ## 配列
 
 ### 基本的な配列
+
 #### 配列の定義と代入を同時に行う方法
 
 JavaScript とは異なり、`波括弧`で配列を記述する。
-
 
 ```cs
 int[] numbers = { 1, 3, 4, 10 };
@@ -206,6 +207,7 @@ string[] strings = { "ABC", "DEF", "GHI" };
 #### 初期化と代入を別で行う方法
 
 初期化の際は`角括弧`で記述して、配列の要素数を指定する必要がある。
+
 ```cs
 double[] arr = new double[3];
 arr[0] = 1.2;

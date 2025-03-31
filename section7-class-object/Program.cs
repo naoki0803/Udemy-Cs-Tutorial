@@ -54,3 +54,15 @@ Console.WriteLine(AutoProperty.Name);
 // AutoProperty.Name = "kondo";  // コンパイルエラーになる為コメントアウト
 
 Console.WriteLine(AutoProperty.Name);
+
+// 練習問題1
+Practice1Vector2D v1 = new Practice1Vector2D(1, 1);
+Practice1Vector2D v2 = new Practice1Vector2D(1, -1);
+v1.Add(v2);
+Console.WriteLine($"{v1.X}, {v1.Y}");
+v1.Sub(v2);
+Console.WriteLine($"{v1.X}, {v1.Y}");
+v1.Mul(2.0);
+Console.WriteLine($"{v1.X}, {v1.Y}");
+v1.DotProduct(v2);
+Console.WriteLine($"{v1.X}, {v1.Y}");

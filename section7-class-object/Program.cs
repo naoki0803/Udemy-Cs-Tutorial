@@ -64,5 +64,5 @@ v1.Sub(v2);
 Console.WriteLine($"{v1.X}, {v1.Y}");
 v1.Mul(2.0);
 Console.WriteLine($"{v1.X}, {v1.Y}");
-v1.DotProduct(v2);
-Console.WriteLine($"{v1.X}, {v1.Y}");
+double resolute = v1.DotProduct(v2);
+Console.WriteLine(resolute);

@@ -99,3 +99,16 @@ int b = int.Parse(Console.ReadLine());
 
 Console.WriteLine("練習問題2 Terminalから引数を受け取る場合");
 Console.WriteLine(Numeric.Max(int.Parse(args[0]), int.Parse(args[1])));
+
+// 練習問題3
+Console.Write("平方根を求める実数値を入力してください:");
+double number = int.Parse(Console.ReadLine());
+if (number < 0)
+{
+    Console.WriteLine("負の数値は平方根を求められません。");
+}
+else
+{
+    double squareRoot = Math.Sqrt(number);
+    Console.WriteLine(squareRoot);
+}

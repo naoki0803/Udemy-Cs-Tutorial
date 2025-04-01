@@ -72,3 +72,19 @@ gc.RunDemo();
 
 // デストラクターの実行(destructorの挙動は確認できず)
 Destructor d = new Destructor();
+
+
+// StaticDataを持つ要素数3の配列を作成
+StaticData[] data = new StaticData[3];
+
+// インスタンス化前のクラスメソッドを利用して、フィールドの値を表示可能な事を確認
+StaticData.Show();
+
+// インスタンス化
+for (int i = 0; i < data.Length; i++)
+{
+    data[i] = new StaticData(i);
+}
+
+// インスタンス化後のクラスメソッドを利用して、参照しているフィールドの値が共通である事を確認
+StaticData.Show();

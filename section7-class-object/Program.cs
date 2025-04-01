@@ -69,3 +69,6 @@ Console.WriteLine(resolute);
 
 GarbageCollector gc = new GarbageCollector();
 gc.RunDemo();
+
+// デストラクターの実行(destructorの挙動は確認できず)
+Destructor d = new Destructor();

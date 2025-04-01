@@ -1,5 +1,3 @@
-test
-
 ## プロジェクトの作成方法
 
 ### 基本的な作成方法
@@ -250,58 +248,300 @@ TODO: ざっくりは理解できたけど、他ファイルの読み込み等�
 
 ## Class
 
-### class の定義方法
+### class の定義と構造
+
+C#のクラスは、オブジェクト指向プログラミングの基本単位です。データ（フィールド、プロパティ）とその操作（メソッド）を一つのユニットにまとめます。
 
 ```cs
 public class ClassName
 {
-    // フィールド
-    private string name;
-    private int age;
+    // 以下class定義の順番(Microsoftの推奨スタイル)
+    // 1. 定数
+    // 2. フィールド（private/protected）
+    // 3. コンストラクタ
+    // 4. プロパティ
+    // 5. メソッド
+    // 6. 内部クラス/enum
+}
+```
 
-    // フィールドのセット
-    public void SetAgeAndName(string name, int age)
+### 1. 定数とフィールド
+
+**定数**：値が変更されない静的な値です。
+
+```cs
+public class Person
+{
+    // 定数（大文字のスネークケースが慣習）
+    public const int MAX_AGE = 120;
+    public const string DEFAULT_COUNTRY = "Japan";
+
+    // フィールド（先頭に_をつけるのが一般的な命名規則）
+    private string _name;
+    private int _age;
+    private readonly DateTime _birthDate; // readonlyは初期化後に変更不可
+}
+```
+
+フィールドは内部的に保持する値で、基本的には `private` または `protected` を設定してカプセル化します。外部からの参照や編集はプロパティを通してコントロールします。
+
+### 2. コンストラクタ
+
+コンストラクタはインスタンス生成時に 1 回だけ実行される特殊なメソッドです。初期化処理を行います。
+
+```cs
+public class Person
+{
+    private string _name;
+    private int _age;
+    private readonly DateTime _birthDate;
+
+    // デフォルトコンストラクタ
+    public Person()
     {
-        this.name = name;
-        this.age = age;
+        _name = "名無し";
+        _age = 0;
+        _birthDate = DateTime.Now;
     }
 
-    // フィールドの表示
-    public void ShowAgeAndName()
+    // パラメータ付きコンストラクタ
+    public Person(string name, int age, DateTime birthDate)
     {
-        Console.WriteLine($"Nameは{Name},年齢は{Age}");
+        _name = name;
+        _age = age;
+        _birthDate = birthDate;
     }
 
-    // コンストラクタ
-    public AccessModifiersPerson(string name, int age)
+    // コンストラクタのオーバーロード
+    public Person(string name) : this(name, 0, DateTime.Now)
     {
-        Name = name;
-        Age = age;
+        // thisキーワードで他のコンストラクタを呼び出せる
     }
+}
+```
 
-    // プロパティのSetterとGetter
-    // SetterとGetterを定義することで、プロパティに対して外部からの編集/参照を定義できる。
+### 3. プロパティ
+
+プロパティはフィールドへのアクセスを制御するための機能です。`get`と`set`アクセサーを使って、読み取りや書き込みの制御が可能です。
+
+#### 完全なプロパティ（バッキングフィールドあり）
+
+```cs
+public class Person
+{
+    private string _name;
+    private int _age;
+
     public string Name
     {
-        set { name = value; }
-        get { return name; }
+        get { return _name; }
+        set
+        {
+            if (string.IsNullOrEmpty(value))
+                throw new ArgumentException("名前を入力してください");
+            _name = value;
+        }
     }
+
     public int Age
     {
-        set { age = value; }
-        get { return age; }
+        get { return _age; }
+        set
+        {
+            if (value < 0 || value > MAX_AGE)
+                throw new ArgumentOutOfRangeException("年齢は0～120の間で設定してください");
+            _age = value;
+        }
+    }
+}
+```
+
+#### 自動実装プロパティ（簡潔な記述）
+
+```cs
+public class Person
+{
+    // 自動実装プロパティ（コンパイラが自動的にバッキングフィールドを生成）
+    public string Name { get; set; }              // 完全な読み書きアクセス
+    public int Age { get; private set; }          // 外部からは読み取り専用
+    public DateTime BirthDate { get; init; }      // C# 9.0以降: 初期化時のみ設定可能
+    public string FullName => $"{Name} {LastName}"; // 式形式のプロパティ（読み取り専用）
+}
+```
+
+### 4. メソッド
+
+メソッドはクラスの振る舞いを定義する関数です。
+
+```cs
+public class Person
+{
+    private string _name;
+    private int _age;
+
+    // インスタンスメソッド
+    public void Introduce()
+    {
+        Console.WriteLine($"こんにちは、{_name}です。{_age}歳です。");
+    }
+
+    // パラメータと戻り値のあるメソッド
+    public bool CanVote(string country)
+    {
+        return country == "Japan" ? _age >= 18 : _age >= 16;
+    }
+
+    // 静的メソッド（クラスに属するメソッド）
+    public static Person CreateAdult(string name)
+    {
+        return new Person(name, 20);
+    }
+
+    // オーバーロードメソッド（同じ名前で異なるパラメータ）
+    public void UpdateInfo(string name)
+    {
+        _name = name;
+    }
+
+    public void UpdateInfo(int age)
+    {
+        _age = age;
+    }
+
+    public void UpdateInfo(string name, int age)
+    {
+        _name = name;
+        _age = age;
+    }
+}
+```
+
+### 5. 内部クラス/enum
+
+クラス内部に別のクラスや enum 型を定義することもできます。
+
+```cs
+public class Person
+{
+    // 内部enum
+    public enum Gender
+    {
+        Male,
+        Female,
+        Other
+    }
+
+    // フィールド
+    private string _name;
+    private int _age;
+    private Gender _gender;
+    private Address _address;
+
+    // プロパティ
+    public Gender CurrentGender { get; set; }
+
+    // 内部クラス
+    public class Address
+    {
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string PostalCode { get; set; }
+
+        public override string ToString()
+        {
+            return $"{PostalCode} {City} {Street}";
+        }
+    }
+
+    // 内部クラスを使用するメソッド
+    public void SetAddress(string street, string city, string postalCode)
+    {
+        _address = new Address
+        {
+            Street = street,
+            City = city,
+            PostalCode = postalCode
+        };
+    }
+}
+```
+
+### 継承とインターフェース
+
+クラスは他のクラスを継承したり、インターフェースを実装したりできます。
+
+```cs
+// インターフェース
+public interface IMovable
+{
+    void Move(int x, int y);
+    double Speed { get; }
+}
+
+// 基底クラス
+public class Human
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+
+    public virtual void Speak()
+    {
+        Console.WriteLine("人間が話します");
     }
 }
 
+// 派生クラス（継承とインターフェース実装）
+public class Student : Human, IMovable
+{
+    public string StudentId { get; set; }
+    public double GPA { get; set; }
+
+    // コンストラクタ
+    public Student(string name, int age, string studentId)
+    {
+        Name = name;
+        Age = age;
+        StudentId = studentId;
+    }
+
+    // オーバーライドメソッド
+    public override void Speak()
+    {
+        Console.WriteLine($"学生の{Name}が話します");
+    }
+
+    // インターフェースの実装
+    public void Move(int x, int y)
+    {
+        Console.WriteLine($"学生が({x},{y})に移動しました");
+    }
+
+    public double Speed => 5.0; // インターフェースのプロパティ実装
+}
 ```
 
-TODO: 違いを調べる
+### アクセス修飾子
 
--   フィールド
--   プロパティ
+C#では以下のアクセス修飾子を使用できます：
 
-※基本的にはカプセル化を実施して、フェールドの値は外部から参照や変更ができないようにする。
-プロパティの `getter` と `setter` を用いてい、readonly にしたり、変更可能にしたりなどを設定する。
+-   `public`: どこからでもアクセス可能
+-   `private`: 同じクラス内からのみアクセス可能
+-   `protected`: 同じクラスおよび派生クラスからアクセス可能
+-   `internal`: 同じアセンブリ（プロジェクト）内からアクセス可能
+-   `protected internal`: 同じアセンブリ内または派生クラスからアクセス可能
+-   `private protected`: 同じアセンブリ内の派生クラスからのみアクセス可能
+
+```cs
+public class AccessExample
+{
+    public int PublicField;
+    private int _privateField;
+    protected int ProtectedField;
+    internal int InternalField;
+    protected internal int ProtectedInternalField;
+    private protected int PrivateProtectedField;
+}
+```
 
 ## コードフォーマット関連
 

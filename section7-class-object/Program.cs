@@ -53,19 +53,19 @@
 // // AutoImplementPropertyの Name プロパティは、 private set; get; としており、変更ができない
 // // AutoProperty.Name = "kondo";  // コンパイルエラーになる為コメントアウト
 
-// Console.WriteLine(AutoProperty.Name);
+Console.WriteLine(AutoProperty.Name);
 
-// // 練習問題1
-// Practice1Vector2D v1 = new Practice1Vector2D(1, 1);
-// Practice1Vector2D v2 = new Practice1Vector2D(1, -1);
-// v1.Add(v2);
-// Console.WriteLine($"{v1.X}, {v1.Y}");
-// v1.Sub(v2);
-// Console.WriteLine($"{v1.X}, {v1.Y}");
-// v1.Mul(2.0);
-// Console.WriteLine($"{v1.X}, {v1.Y}");
-// double resolute = v1.DotProduct(v2);
-// Console.WriteLine(resolute);
+// 練習問題1
+Practice1Vector2D v1 = new Practice1Vector2D(1, 1);
+Practice1Vector2D v2 = new Practice1Vector2D(1, -1);
+v1.Add(v2);
+Console.WriteLine($"{v1.X}, {v1.Y}");
+v1.Sub(v2);
+Console.WriteLine($"{v1.X}, {v1.Y}");
+v1.Mul(2.0);
+Console.WriteLine($"{v1.X}, {v1.Y}");
+double resolute = v1.DotProduct(v2);
+Console.WriteLine(resolute);
 
 GarbageCollector gc = new GarbageCollector();
 gc.RunDemo();

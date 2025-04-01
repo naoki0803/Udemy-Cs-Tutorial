@@ -88,3 +88,14 @@ for (int i = 0; i < data.Length; i++)
 
 // インスタンス化後のクラスメソッドを利用して、参照しているフィールドの値が共通である事を確認
 StaticData.Show();
+
+
+// 練習問題2
+Console.WriteLine("練習問題2");
+Console.Write("1つ目の数値:");
+int a = int.Parse(Console.ReadLine());
+Console.Write("2つ目の数値:");
+int b = int.Parse(Console.ReadLine());
+
+Console.WriteLine("練習問題2 Terminalから引数を受け取る場合");
+Console.WriteLine(Numeric.Max(int.Parse(args[0]), int.Parse(args[1])));

@@ -552,6 +552,137 @@ public class AccessExample
 }
 ```
 
+## 継承
+
+### 継承とは？
+
+継承（Inheritance）は、オブジェクト指向プログラミングの重要な概念の一つで、既存のクラス（親クラス・基底クラス）の特性や機能を引き継いで、新しいクラス（子クラス・派生クラス）を作成する仕組みです。
+
+継承を使うと以下のようなメリットがあります：
+
+-   **コードの再利用**: 既存のクラスの機能を再利用できるため、重複コードを減らせます
+-   **拡張性**: 既存の機能を保ちながら、新しい機能を追加できます
+-   **階層構造**: 類似したクラス間の関係を明確な階層で表現できます
+
+### 継承の基本的な記述方法
+
+C#では、継承する子クラスを定義する際に、クラス名の後にコロン（:）を付け、その後に親クラスの名前を記述します。
+
+```cs
+public class 子クラス名 : 親クラス名
+{
+    // 子クラスの内容
+}
+```
+
+### 継承の実践例
+
+以下は計算機能を持つクラスの継承の例です：
+
+```cs:ParentCalc.cs
+public class ParentCalc
+{
+    // protectedアクセス修飾子を使うと、このクラスと派生クラスからアクセス可能
+    protected int num1;
+    protected int num2;
+
+    // コンストラクタ
+    public ParentCalc(int num1, int num2)
+    {
+        this.num1 = num1;
+        this.num2 = num2;
+    }
+
+    // プロパティ
+    public int Num1 { set; get; }
+    public int Num2 { set; get; }
+
+    // メソッド
+    public int Add()
+    {
+        return num1 + num2;
+    }
+
+    public int Sub()
+    {
+        return num1 - num2;
+    }
+}
+```
+
+```cs:ChildCalc.cs
+public class ChildCalc : ParentCalc
+{
+    // 子クラスのコンストラクタ
+    // base(num1, num2)で親クラスのコンストラクタを呼び出す
+    public ChildCalc(int num1, int num2) : base(num1, num2)
+    {
+        // 追加の初期化処理が必要な場合はここに記述
+    }
+
+    // 子クラス独自のメソッド（親クラスの機能を拡張）
+    public int Mul()
+    {
+        return num1 * num2;
+    }
+
+    public int Div()
+    {
+        // 実際のコードでは0除算チェックを追加すべき
+        return num1 / num2;
+    }
+}
+```
+
+### 継承クラスの使い方
+
+```cs:Program.cs
+// 親クラスのインスタンス生成
+ParentCalc parentCalc = new ParentCalc(10, 20);
+
+// 子クラスのインスタンス生成
+ChildCalc childCalc = new ChildCalc(30, 20);
+
+// 親クラスのメソッド呼び出し
+Console.WriteLine($"親クラスAdd:{parentCalc.Add()}"); // 結果: 30
+Console.WriteLine($"親クラスSub:{parentCalc.Sub()}"); // 結果: -10
+
+// 子クラスからは親クラスのメソッドも呼び出せる
+Console.WriteLine($"子クラスAdd:{childCalc.Add()}"); // 結果: 50
+Console.WriteLine($"子クラスSub:{childCalc.Sub()}"); // 結果: 10
+
+// 子クラス独自のメソッド呼び出し
+Console.WriteLine($"子クラスMul:{childCalc.Mul()}"); // 結果: 600
+Console.WriteLine($"子クラスDiv:{childCalc.Div()}"); // 結果: 1
+```
+
+### 継承使用時の重要ポイント
+
+1. **アクセス修飾子の理解**：
+
+    - `private`: 同一クラス内からのみアクセス可能（子クラスからもアクセス不可）
+    - `protected`: 同一クラスと派生クラスからアクセス可能
+    - `public`: どこからでもアクセス可能
+
+2. **base キーワード**：
+
+    - 子クラスから親クラスのメンバーにアクセスする時に使用
+    - コンストラクタでは`: base(引数)`の形で親クラスのコンストラクタを呼び出す
+
+3. **メソッドのオーバーライド**：
+    - 親クラスで`virtual`キーワードを使用したメソッドを
+    - 子クラスで`override`キーワードを使用して再定義できる
+
+### 実際の使用例
+
+計算機の例以外にも、継承は多くの場面で活用できます：
+
+-   `Person`クラスを継承した`Student`、`Teacher`クラス
+-   `Animal`クラスを継承した`Dog`、`Cat`、`Bird`クラス
+-   `Vehicle`クラスを継承した`Car`、`Motorcycle`、`Bicycle`クラス
+
+継承を使うことで、共通の特性と振る舞いを基底クラスに定義し、個別の特性を派生クラスに追加することで、効率的なコード管理が可能になります。
+
 ## コードフォーマット関連
 
 omnisharp は現状利用しておらず、C# Div Kit 内の機能でフォーマットしていそうだが、その設定実体がどこかがわからない。

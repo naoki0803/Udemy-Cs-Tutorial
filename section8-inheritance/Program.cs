@@ -10,3 +10,7 @@ Console.WriteLine($"子クラスSub:{childCalc.Sub()}");
 Console.WriteLine($"子クラスMul:{childCalc.Mul()}");
 Console.WriteLine($"子クラスDiv:{childCalc.Div()}");
 
+
+ParentCalc OverlordCalc = new ChildCalc(30, 20);
+Console.WriteLine($"子クラスAdd:{childCalc.Add()}");
+Console.WriteLine($"overrideしたAdd:{OverlordCalc.Add()}");

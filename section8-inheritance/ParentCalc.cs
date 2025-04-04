@@ -24,6 +24,7 @@ public class ParentCalc
     }
     public int Add()
     {
+        Console.Write("ParentCalcのAddメソッド: ");
         return num1 + num2;
     }
 

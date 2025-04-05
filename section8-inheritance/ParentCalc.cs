@@ -22,7 +22,8 @@ public class ParentCalc
         get { return num2; }
         set { num2 = value; }
     }
-    public int Add()
+    // public int Add()
+    public virtual int Add()
     {
         Console.Write("ParentCalcのAddメソッド: ");
         return num1 + num2;

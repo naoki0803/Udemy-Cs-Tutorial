@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "section7-class-object", "se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "section8-inheritance", "section8-inheritance\section8-inheritance.csproj", "{7A09F17F-A874-4B01-9E60-F191413DF61C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "section8-practice", "section8-practice\section8-practice.csproj", "{8BB6C181-82F6-42AD-8572-D0050CD50D42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{7A09F17F-A874-4B01-9E60-F191413DF61C}.Release|x64.Build.0 = Release|Any CPU
 		{7A09F17F-A874-4B01-9E60-F191413DF61C}.Release|x86.ActiveCfg = Release|Any CPU
 		{7A09F17F-A874-4B01-9E60-F191413DF61C}.Release|x86.Build.0 = Release|Any CPU
+		{8BB6C181-82F6-42AD-8572-D0050CD50D42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB6C181-82F6-42AD-8572-D0050CD50D42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB6C181-82F6-42AD-8572-D0050CD50D42}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8BB6C181-82F6-42AD-8572-D0050CD50D42}.Debug|x64.Build.0 = Debug|Any CPU
+		{8BB6C181-82F6-42AD-8572-D0050CD50D42}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8BB6C181-82F6-42AD-8572-D0050CD50D42}.Debug|x86.Build.0 = Debug|Any CPU
+		{8BB6C181-82F6-42AD-8572-D0050CD50D42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BB6C181-82F6-42AD-8572-D0050CD50D42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BB6C181-82F6-42AD-8572-D0050CD50D42}.Release|x64.ActiveCfg = Release|Any CPU
+		{8BB6C181-82F6-42AD-8572-D0050CD50D42}.Release|x64.Build.0 = Release|Any CPU
+		{8BB6C181-82F6-42AD-8572-D0050CD50D42}.Release|x86.ActiveCfg = Release|Any CPU
+		{8BB6C181-82F6-42AD-8572-D0050CD50D42}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

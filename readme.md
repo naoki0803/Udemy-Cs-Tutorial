@@ -705,6 +705,12 @@ public abstract class 抽象クラス名
     // 通常のフィールド・プロパティ・メソッド
     public string Name { get; set; }
 
+    // 抽象プロパティ（実装なし、派生クラスでの実装が必須）
+    public abstract int AbstractProperty { get; set; }
+
+    // 仮想プロパティ（実装あり、派生クラスでのオーバーライドは任意）
+    public virtual string VirtualProperty { get; set; } = "初期値";
+
     // 通常のメソッド（実装あり）
     public void NormalMethod()
     {
@@ -722,6 +728,32 @@ public abstract class 抽象クラス名
 }
 ```
 
+### 抽象プロパティについて
+
+抽象プロパティは抽象メソッドと同様に、派生クラスでの実装が必須のプロパティです。以下のような特徴があります：
+
+1. **実装の強制**：
+
+    - `abstract`キーワードを使って宣言され、派生クラスで必ず実装する必要があります。
+
+2. **アクセサの柔軟性**：
+
+    - 読み取り専用（get のみ）、書き込み専用（set のみ）、または両方のアクセサを宣言できます。
+    - 派生クラスでも同じアクセサを実装する必要があります。
+
+3. **記述方法**：
+
+    ```cs
+    // 読み書き両方の抽象プロパティ
+    public abstract int Property1 { get; set; }
+
+    // 読み取り専用の抽象プロパティ
+    public abstract string Property2 { get; }
+
+    // 書き込み専用の抽象プロパティ（あまり一般的ではない）
+    public abstract double Property3 { set; }
+    ```
+
 ### 抽象クラスの実践例
 
 動物を表す抽象クラスと、それを継承した具体的な動物クラスの例です。
@@ -734,6 +766,10 @@ public abstract class Animal
     public string Name { get; set; }
     public int Age { get; set; }
 
+    // 抽象プロパティ（派生クラスでの実装が必須）
+    public abstract string Species { get; }
+    public abstract double Weight { get; set; }
+
     // コンストラクタ
     public Animal(string name, int age)
     {
@@ -744,7 +780,7 @@ public abstract class Animal
     // 通常のメソッド
     public void ShowInfo()
     {
-        Console.WriteLine($"名前: {Name}, 年齢: {Age}歳");
+        Console.WriteLine($"名前: {Name}, 年齢: {Age}歳, 種類: {Species}, 体重: {Weight}kg");
     }
 
     // 抽象メソッド（派生クラスでの実装が必須）
@@ -765,10 +801,26 @@ public class Dog : Animal
     // 犬特有のプロパティ
     public string Breed { get; set; }
 
+    // 抽象プロパティの実装
+    public override string Species => "犬";
+
+    private double _weight;
+    public override double Weight
+    {
+        get { return _weight; }
+        set
+        {
+            if (value <= 0)
+                throw new ArgumentException("体重は0より大きい値を設定してください");
+            _weight = value;
+        }
+    }
+
     // 親クラスのコンストラクタを呼び出す
-    public Dog(string name, int age, string breed) : base(name, age)
+    public Dog(string name, int age, string breed, double weight) : base(name, age)
     {
         Breed = breed;
+        Weight = weight;
     }
 
     // 抽象メソッドの実装（必須）
@@ -798,10 +850,21 @@ public class Cat : Animal
     // 猫特有のプロパティ
     public bool IsIndoor { get; set; }
 
+    // 抽象プロパティの実装
+    public override string Species => "猫";
+
+    private double _weight;
+    public override double Weight
+    {
+        get { return _weight; }
+        set { _weight = value > 0 ? value : 0.1; }
+    }
+
     // 親クラスのコンストラクタを呼び出す
-    public Cat(string name, int age, bool isIndoor) : base(name, age)
+    public Cat(string name, int age, bool isIndoor, double weight) : base(name, age)
     {
         IsIndoor = isIndoor;
+        Weight = weight;
     }
 
     // 抽象メソッドの実装（必須）
@@ -829,12 +892,16 @@ class Program
         // Animal animal = new Animal("名前", 1); // コンパイルエラー
 
         // 派生クラスはインスタンス化できる
-        Dog dog = new Dog("ポチ", 3, "柴犬");
-        Cat cat = new Cat("タマ", 2, true);
+        Dog dog = new Dog("ポチ", 3, "柴犬", 12.5);
+        Cat cat = new Cat("タマ", 2, true, 4.8);
 
         // 基本的な情報表示（抽象クラスの通常メソッド）
-        dog.ShowInfo();  // 名前: ポチ, 年齢: 3歳
-        cat.ShowInfo();  // 名前: タマ, 年齢: 2歳
+        dog.ShowInfo();  // 名前: ポチ, 年齢: 3歳, 種類: 犬, 体重: 12.5kg
+        cat.ShowInfo();  // 名前: タマ, 年齢: 2歳, 種類: 猫, 体重: 4.8kg
+
+        // 抽象プロパティへのアクセス
+        Console.WriteLine($"{dog.Name}の種類: {dog.Species}");  // ポチの種類: 犬
+        Console.WriteLine($"{cat.Name}の体重: {cat.Weight}kg"); // タマの体重: 4.8kg
 
         // 抽象メソッドの実装呼び出し
         dog.MakeSound(); // ワンワン！
@@ -852,7 +919,9 @@ class Program
         Animal animal1 = dog;
         Animal animal2 = cat;
 
-        // 抽象クラス型の変数からでも、オーバーライドされたメソッドは正しく呼び出される
+        // 抽象クラス型の変数からでも、オーバーライドされたメソッドとプロパティは正しく呼び出される
+        Console.WriteLine($"動物1の種類: {animal1.Species}"); // 動物1の種類: 犬
+        Console.WriteLine($"動物2の種類: {animal2.Species}"); // 動物2の種類: 猫
         animal1.MakeSound(); // ワンワン！
         animal2.MakeSound(); // ニャー！
     }

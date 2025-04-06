@@ -1,8 +1,8 @@
 ﻿using section9_generics;
 
-Crow c = new("カラス");
+Crow c = new();
 c.Sing();
-Sparrow s = new("すずめ");
+Sparrow s = new();
 s.Sing();
 
 

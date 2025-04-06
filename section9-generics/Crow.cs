@@ -2,7 +2,7 @@
 
 
 // public class Crow(string name)   //継承前の記述
-public class Crow() : Bird("カラス")
+public class Crow(string name) : Bird(name)
 {
     public override string Name => _name;
     /*

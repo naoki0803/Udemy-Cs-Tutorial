@@ -2,7 +2,7 @@
 
 
 // public class Sparrow(string name)   //継承前の記述
-public class Sparrow() : Bird("すずめ")
+public class Sparrow(string name) : Bird(name)
 {
     public override string Name => _name;
     /*

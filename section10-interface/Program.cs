@@ -23,3 +23,19 @@ i.Moge();
 
 IFunc2 j = (IFunc2)d;
 j.Moge();
+
+Data data = new Data(1);
+
+data.Read();
+data.Write(2);
+
+
+IReadData rd = data;
+
+rd.Read();
+// rd.Write(2);  // IReadDate にはWrite()メソッドはない
+
+IWriteData wd = data;
+
+// wd.Read(); // IWriteDate にはRead()メソッドはない
+wd.Write(2);

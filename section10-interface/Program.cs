@@ -39,3 +39,16 @@ IWriteData wd = data;
 
 // wd.Read(); // IWriteDate にはRead()メソッドはない
 wd.Write(2);
+
+
+/*
+IMul を継承したMul1、Mul2は、どちらもCalcメソッドを保有しており、
+計算方法の処理が異なっているが、インスタンス化した m1,m2 はIMul型として宣言されており、
+いずれも、それぞれのメモリが指しているclassの処理に従って、結果を出力できている。
+*/
+IMul m1 = new Mul1(2, 5);
+Console.WriteLine(m1.Calc());
+
+
+IMul m2 = new Mul2(5, 5);
+Console.WriteLine(m2.Calc());

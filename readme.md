@@ -998,82 +998,223 @@ class Program
 
 4. 抽象クラスのメンバーを保護するために、適切なアクセス修飾子（`protected`など）を使用しましょう。
 
-## コードフォーマット関連
+## コレクションの詳細
 
-omnisharp は現状利用しておらず、C# Div Kit 内の機能でフォーマットしていそうだが、その設定実体がどこかがわからない。
+コレクションとは、複数のデータをまとめて管理するためのデータ構造です。C#では様々な種類のコレクションが提供されており、用途に応じて使い分けることができます。
 
-.editorconfig を記述しても、記述がうまく反映しない。
-原因不明。。。
+### 1. 配列（Array）
 
-以下 URL に記載しているサンプルフォーマットテンプレート
-https://tech-blog.cloud-config.jp/2020-12-18-visual-studio-code-for-csharp-development/
+配列は最も基本的なコレクションで、同じ型の要素を固定サイズで格納します。
 
-~/.omnisharp/omnisharp.json に記述するか、プロジェクトのルートに記述する(.omnisharp/omnisharp.json)
+#### 基本的な配列の宣言と初期化
 
-```omnisharp.json
-{
-    "FormattingOptions": {
-        "EnableEditorConfigSupport": false,
-        "NewLine": "\n",
-        "UseTabs": false,
-        "TabSize": 2,
-        "IndentationSize": 2,
-        "SpacingAfterMethodDeclarationName": false,
-        "SpaceWithinMethodDeclarationParenthesis": false,
-        "SpaceBetweenEmptyMethodDeclarationParentheses": false,
-        "SpaceAfterMethodCallName": false,
-        "SpaceWithinMethodCallParentheses": false,
-        "SpaceBetweenEmptyMethodCallParentheses": false,
-        "SpaceAfterControlFlowStatementKeyword": true,
-        "SpaceWithinExpressionParentheses": false,
-        "SpaceWithinCastParentheses": false,
-        "SpaceWithinOtherParentheses": false,
-        "SpaceAfterCast": false,
-        "SpacesIgnoreAroundVariableDeclaration": false,
-        "SpaceBeforeOpenSquareBracket": false,
-        "SpaceBetweenEmptySquareBrackets": false,
-        "SpaceWithinSquareBrackets": false,
-        "SpaceAfterColonInBaseTypeDeclaration": true,
-        "SpaceAfterComma": true,
-        "SpaceAfterDot": false,
-        "SpaceAfterSemicolonsInForStatement": true,
-        "SpaceBeforeColonInBaseTypeDeclaration": true,
-        "SpaceBeforeComma": false,
-        "SpaceBeforeDot": false,
-        "SpaceBeforeSemicolonsInForStatement": false,
-        "SpacingAroundBinaryOperator": "single",
-        "IndentBraces": false,
-        "IndentBlock": true,
-        "IndentSwitchSection": true,
-        "IndentSwitchCaseSection": true,
-        "IndentSwitchCaseSectionWhenBlock": true,
-        "LabelPositioning": "oneLess",
-        "WrappingPreserveSingleLine": true,
-        "WrappingKeepStatementsOnSingleLine": true,
-        "NewLinesForBracesInTypes": true,
-        "NewLinesForBracesInMethods": true,
-        "NewLinesForBracesInProperties": true,
-        "NewLinesForBracesInAccessors": true,
-        "NewLinesForBracesInAnonymousMethods": true,
-        "NewLinesForBracesInControlBlocks": true,
-        "NewLinesForBracesInAnonymousTypes": true,
-        "NewLinesForBracesInObjectCollectionArrayInitializers": true,
-        "NewLinesForBracesInLambdaExpressionBody": true,
-        "NewLineForElse": true,
-        "NewLineForCatch": true,
-        "NewLineForFinally": true,
-        "NewLineForMembersInObjectInit": true,
-        "NewLineForMembersInAnonymousTypes": true,
-        "NewLineForClausesInQuery": true,
-        "OrganizeImports": true
-    },
-    "RoslynExtensionsOptions": {
-        "documentAnalysisTimeoutMs": 10000,
-        "enableDecompilationSupport": true,
-        "enableImportCompletion": true,
-        "enableAnalyzersSupport": true,
-        "locationPaths": ["//path_to/code_actions.dll"]
-    }
+```cs
+// 宣言と初期化を同時に行う方法
+int[] numbers = { 1, 3, 4, 10 };
+double[] doubleArr = { 1.2, 3.7, 4.1 };
+string[] strings = { "ABC", "DEF", "GHI" };
+
+// 初期化と代入を別で行う方法
+double[] arr = new double[3]; // サイズ3の配列を作成
+arr[0] = 1.2;
+arr[1] = 3.7;
+arr[2] = 4.1;
+```
+
+#### 多次元配列とジャグ配列
+
+```cs
+// 2次元配列
+int[,] matrix = new int[3, 3] {
+    { 1, 2, 3 },
+    { 4, 5, 6 },
+    { 7, 8, 9 }
+};
+
+// ジャグ配列（配列の配列、各配列のサイズが異なる）
+int[][] jaggedArray = new int[][] {
+    new int[] { 1 },
+    new int[] { 2, 2 },
+    new int[] { 3, 3, 3 }
+};
+```
+
+#### 配列の特徴と使用場面
+
+-   **長所**: アクセスが高速、メモリ効率が良い
+-   **短所**: サイズが固定（変更不可）
+-   **使用場面**: サイズが変わらないデータの集合（例：曜日名、月名）
+
+### 2. リスト（List<T>）
+
+リストは可変長のコレクションで、要素の追加・削除が容易です。
+
+```cs
+// Listの宣言と初期化
+List<int> numbers = new List<int>(); // 空のリスト
+List<string> names = new List<string> { "佐藤", "鈴木", "田中" }; // 初期値あり
+
+// 要素の追加
+numbers.Add(10);
+numbers.Add(20);
+names.Add("伊藤");
+
+// 要素の挿入
+numbers.Insert(1, 15); // インデックス1の位置に15を挿入
+
+// 要素の削除
+numbers.Remove(10); // 値10を削除
+names.RemoveAt(0); // インデックス0の要素を削除
+
+// 要素の存在確認
+bool exists = names.Contains("鈴木"); // trueを返す
+```
+
+#### リストの特徴と使用場面
+
+-   **長所**: サイズが可変、豊富なメソッド提供
+-   **短所**: 配列より若干遅い、メモリ使用量が多い
+-   **使用場面**: サイズが変わるデータの集合（例：ユーザー入力データ、動的に変化するデータ）
+
+### 3. ディクショナリ（Dictionary<TKey, TValue>）
+
+ディクショナリはキーと値のペアを格納するコレクションです。
+
+```cs
+// Dictionaryの宣言と初期化
+Dictionary<string, int> ages = new Dictionary<string, int>();
+Dictionary<int, string> idToName = new Dictionary<int, string> {
+    { 1, "佐藤" },
+    { 2, "鈴木" },
+    { 3, "田中" }
+};
+
+// 要素の追加
+ages["佐藤"] = 30;
+ages["鈴木"] = 25;
+ages.Add("田中", 40); // Add メソッドでも追加可能
+
+// 値の取得
+int suzukiAge = ages["鈴木"]; // 25
+
+// キーの存在確認
+if (ages.ContainsKey("伊藤")) {
+    // キーが存在する場合の処理
 }
 
+// 安全に値を取得
+if (ages.TryGetValue("伊藤", out int itoAge)) {
+    // 値が存在する場合の処理
+} else {
+    // 値が存在しない場合の処理
+}
+
+// すべてのキーと値を列挙
+foreach (var pair in ages) {
+    Console.WriteLine($"{pair.Key}: {pair.Value}歳");
+}
 ```
+
+#### ディクショナリの特徴と使用場面
+
+-   **長所**: キーによる高速なルックアップ、キーと値の明確な関連付け
+-   **短所**: キーは一意である必要がある、メモリ使用量が多い
+-   **使用場面**: キーと値のマッピング（例：ID と名前、設定値の格納）
+
+### 4. ハッシュセット（HashSet<T>）
+
+ハッシュセットは重複のない要素を格納するコレクションです。
+
+```cs
+// HashSetの宣言と初期化
+HashSet<int> uniqueNumbers = new HashSet<int>();
+HashSet<string> uniqueNames = new HashSet<string> { "佐藤", "鈴木", "田中" };
+
+// 要素の追加（重複は無視される）
+uniqueNumbers.Add(10);
+uniqueNumbers.Add(20);
+uniqueNumbers.Add(10); // 既に存在するので追加されない
+
+// 要素の存在確認
+bool exists = uniqueNames.Contains("鈴木"); // trueを返す
+
+// セット演算
+HashSet<int> set1 = new HashSet<int> { 1, 2, 3 };
+HashSet<int> set2 = new HashSet<int> { 2, 3, 4 };
+
+set1.UnionWith(set2); // 和集合: {1, 2, 3, 4}
+// その他: IntersectWith（積集合）、ExceptWith（差集合）など
+```
+
+#### ハッシュセットの特徴と使用場面
+
+-   **長所**: 要素の重複を許さない、高速な検索
+-   **短所**: 順序が保証されない
+-   **使用場面**: 重複を排除したいデータの集合（例：一意の ID リスト）
+
+### 5. キュー（Queue<T>）とスタック（Stack<T>）
+
+キューは先入れ先出し（FIFO）、スタックは後入れ先出し（LIFO）のデータ構造です。
+
+```cs
+// キューの宣言と初期化
+Queue<string> customerQueue = new Queue<string>();
+customerQueue.Enqueue("佐藤"); // 列の最後に追加
+customerQueue.Enqueue("鈴木");
+customerQueue.Enqueue("田中");
+
+string nextCustomer = customerQueue.Dequeue(); // "佐藤"を取り出し
+string peekCustomer = customerQueue.Peek(); // "鈴木"を覗き見（削除しない）
+
+// スタックの宣言と初期化
+Stack<int> numberStack = new Stack<int>();
+numberStack.Push(10); // スタックに追加
+numberStack.Push(20);
+numberStack.Push(30);
+
+int topNumber = numberStack.Pop(); // 30を取り出し
+int peekNumber = numberStack.Peek(); // 20を覗き見（削除しない）
+```
+
+#### キューとスタックの特徴と使用場面
+
+-   **キューの使用場面**: 順番に処理するデータ（例：印刷待ちタスク、メッセージキュー）
+-   **スタックの使用場面**: 最新のデータを優先的に処理（例：操作の取り消し履歴、再帰処理）
+
+### 6. コレクションの選び方
+
+| コレクション                     | 主な特徴                       | 最適な用途                     |
+| -------------------------------- | ------------------------------ | ------------------------------ |
+| 配列 (Array)                     | 固定長、高速アクセス           | サイズが変わらないデータの格納 |
+| リスト (List<T>)                 | 可変長、要素の追加・削除が容易 | 動的に変化するデータの格納     |
+| ディクショナリ (Dictionary<K,V>) | キーと値のペア、高速検索       | キーによる値のルックアップ     |
+| ハッシュセット (HashSet<T>)      | 重複なし、高速検索             | 一意の要素を扱う場合           |
+| キュー (Queue<T>)                | FIFO（先入れ先出し）           | 順番に処理すべきデータ         |
+| スタック (Stack<T>)              | LIFO（後入れ先出し）           | 最新データを優先的に処理       |
+
+### 7. コレクションの使用時の留意点
+
+1. **適切なコレクションの選択**:
+
+    - データの性質（固定/可変、順序の重要性など）
+    - 操作の頻度（読み取り優先か追加/削除優先か）
+    - メモリ効率と実行速度のバランス
+
+2. **パフォーマンス考慮**:
+
+    - 大量のデータを扱う場合、適切なコレクションを選ぶことが重要
+    - 例: 頻繁な検索操作が必要な場合は Dictionary や HashSet が有利
+
+3. **ジェネリックコレクションの活用**:
+
+    - 型安全性を確保するため、非ジェネリックコレクション（ArrayList, Hashtable など）よりもジェネリックコレクションを優先する
+
+4. **並列処理時の注意**:
+
+    - 複数スレッドからアクセスする場合は、`ConcurrentDictionary<K,V>`などのスレッドセーフなコレクションを使用する
+    - または適切な同期処理を実装する
+
+5. **メモリ管理**:
+
+    - 不要になったコレクションは null を代入して、ガベージコレクションの対象にする
+    - 大きなコレクションは使用後に`Clear()`メソッドで要素を解放する

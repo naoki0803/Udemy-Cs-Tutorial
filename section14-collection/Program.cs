@@ -16,3 +16,56 @@ foreach (var item in list)                  // foreach で愚直に
 {
     Console.WriteLine(item);
 }
+
+List<String> names = new List<String>() { "Taro", "Hanako", "Jiro", "kaoru", "Taro" };
+Console.WriteLine($"削除前: {string.Join(" ", names)}");
+
+// Remove は完全位置ではじめに見つかった要素を削除
+names.Remove("Taro");
+Console.WriteLine($"削除後1: {string.Join(" ", names)}");
+
+// 部分一致では削除されない
+names.Remove("Hana");
+Console.WriteLine($"削除後2: {string.Join(" ", names)}");
+
+// 指定したindexの要素を削除
+names.RemoveAt(names.Count - 1);
+Console.WriteLine($"最後の要素を削除: {string.Join(" ", names)}");
+
+
+int[] numbers = { 1, 2, 3, 4, 5 };
+
+
+/*
+    ディクショナリ
+    javascriptのオブジェクトと同じようなものです。
+*/
+//人口
+Dictionary<string, int> population = new Dictionary<string, int>()
+{
+    { "Japan", 1396 },
+    { "China", 1392 },
+    { "India", 1326 },
+    { "Indonesia", 1207 },
+    { "Pakistan", 1176 },
+    { "Bangladesh", 1164 }
+};
+
+foreach (var item in population)
+{
+    Console.WriteLine($"{item.Key}の人口は{item.Value}万人です。");
+}
+
+
+Dictionary<string, string> capital = new Dictionary<string, string>()
+{
+    { "日本", "東京" },
+    { "イギリス", "ロンドン" },
+    { "フランス", "パリ"  },
+    { "中国", "北京" }
+};
+
+foreach (var item in capital)
+{
+    Console.WriteLine($"{item.Key}の首都は{item.Value}です。");
+}

@@ -111,3 +111,57 @@ Console.WriteLine(string.Join(" ", HashNumbers));
 Console.WriteLine(string.Join(" ", HashNumbers.OrderBy(n => n)));
 Console.WriteLine(string.Join(" ", HashNumbers.Order()));
 
+// 練習問題 3
+Dictionary<string, int> Months = new Dictionary<string, int>()
+{
+    {"January", 1},
+    {"February", 2},
+    {"March", 3},
+    {"April", 4},
+    {"May", 5},
+    {"June", 6},
+    {"July", 7},
+    {"August", 8},
+    {"September", 9},
+    {"October", 10},
+    {"November", 11},
+    {"December", 12},
+};
+
+Console.Write("英語で月を入力してください: ");
+string inputValue = Console.ReadLine();
+
+Console.WriteLine($"入力した月は{Months[inputValue]}月です");
+
+
+// ディクショナリの定義バリエーション
+// 愚直に代入Version
+Dictionary<string, int> Months2 = new Dictionary<string, int>();
+Months2["January"] = 1;
+Months2["February"] = 2;
+Months2["March"] = 3;
+Months2["April"] = 4;
+Months2["May"] = 5;
+Months2["June"] = 6;
+Months2["July"] = 7;
+Months2["August"] = 8;
+Months2["September"] = 9;
+Months2["October"] = 10;
+Months2["November"] = 11;
+Months2["December"] = 12;
+
+// 配列からループで代入
+string[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+
+// 配列からループで代入:1 foreachを使うVersion
+Dictionary<string, int> Months4 = new Dictionary<string, int>();
+int idx = 1;
+foreach (var item in months)
+{
+    Months4[item] = idx;
+    idx++;
+}
+
+// 配列からループで代入:2 Selectを使うVersion
+Dictionary<string, int> Months3 = new Dictionary<string, int>();
+Months3 = months.Select((m, idx) => new { Key = m, Value = idx + 1 }).ToDictionary(x => x.Key, x => x.Value);

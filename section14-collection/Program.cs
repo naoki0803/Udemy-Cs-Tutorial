@@ -72,8 +72,28 @@ foreach (var item in capital)
     Console.WriteLine($"{item.Key}の首都は{item.Value}です。");
 }
 
+// 練習問題 1
+// List<int> Numbers = new List<int>();
 
-List<int> Numbers = new List<int>();
+// while (true)
+// {
+//     Console.Write("1〜10の値を入力してください: ");
+//     int inputNum = int.Parse(Console.ReadLine());
+//     // 1~10以外の数値を入力したら終了する
+//     if (inputNum < 1 || inputNum > 10)
+//     {
+//         break;
+//     }
+//     Numbers.Add(inputNum);
+// }
+
+// Console.WriteLine(string.Join(" ", Numbers));
+// Console.WriteLine(Numbers.Max());
+// Console.WriteLine(Numbers.Min());
+
+
+// 練習問題 2
+HashSet<int> HashNumbers = new HashSet<int>();
 
 while (true)
 {
@@ -84,9 +104,10 @@ while (true)
     {
         break;
     }
-    Numbers.Add(inputNum);
+    HashNumbers.Add(inputNum);
 }
 
-Console.WriteLine(string.Join(" ", Numbers));
-Console.WriteLine(Numbers.Max());
-Console.WriteLine(Numbers.Min());
+Console.WriteLine(string.Join(" ", HashNumbers));
+Console.WriteLine(string.Join(" ", HashNumbers.OrderBy(n => n)));
+Console.WriteLine(string.Join(" ", HashNumbers.Order()));
+

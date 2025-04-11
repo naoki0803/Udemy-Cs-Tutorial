@@ -17,6 +17,8 @@ foreach (var item in list)                  // foreach で愚直に
     Console.WriteLine(item);
 }
 
+
+
 List<String> names = new List<String>() { "Taro", "Hanako", "Jiro", "kaoru", "Taro" };
 Console.WriteLine($"削除前: {string.Join(" ", names)}");
 
@@ -69,3 +71,22 @@ foreach (var item in capital)
 {
     Console.WriteLine($"{item.Key}の首都は{item.Value}です。");
 }
+
+
+List<int> Numbers = new List<int>();
+
+while (true)
+{
+    Console.Write("1〜10の値を入力してください: ");
+    int inputNum = int.Parse(Console.ReadLine());
+    // 1~10以外の数値を入力したら終了する
+    if (inputNum < 1 || inputNum > 10)
+    {
+        break;
+    }
+    Numbers.Add(inputNum);
+}
+
+Console.WriteLine(string.Join(" ", Numbers));
+Console.WriteLine(Numbers.Max());
+Console.WriteLine(Numbers.Min());

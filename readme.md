@@ -998,7 +998,7 @@ class Program
 
 4. 抽象クラスのメンバーを保護するために、適切なアクセス修飾子（`protected`など）を使用しましょう。
 
-## コレクションの詳細
+## コレクション
 
 コレクションとは、複数のデータをまとめて管理するためのデータ構造です。C#では様々な種類のコレクションが提供されており、用途に応じて使い分けることができます。
 
@@ -1218,3 +1218,322 @@ int peekNumber = numberStack.Peek(); // 20を覗き見（削除しない）
 
     - 不要になったコレクションは null を代入して、ガベージコレクションの対象にする
     - 大きなコレクションは使用後に`Clear()`メソッドで要素を解放する
+
+## デリゲート
+
+### デリゲートとは
+
+デリゲートは、C#におけるメソッドを参照するための型です。TypeScript の関数型（Function type）に近い概念で、メソッドを変数のように扱い、実行時に動的にメソッドを切り替えることができる強力な機能です。TypeScript では関数をファーストクラスオブジェクトとして扱いますが、C#ではデリゲートという特別な型を通じてメソッドを参照します。
+
+### TypeScript ユーザーのためのデリゲート解説
+
+TypeScript では関数型を以下のように定義します：
+
+```typescript
+// TypeScriptの関数型
+type Calculator = (x: number, y: number) => number;
+
+// 使用例
+const add: Calculator = (x, y) => x + y;
+const subtract: Calculator = (x, y) => x - y;
+
+// 関数の使用
+const result = add(5, 3); // 8
+```
+
+C#のデリゲートは以下のように定義され、同様の機能を提供します：
+
+```csharp
+// C#のデリゲート
+public delegate int Calculate(int x, int y);
+
+// 使用例
+public int Add(int x, int y) { return x + y; }
+public int Subtract(int x, int y) { return x - y; }
+
+Calculator calc = Add;
+int result = calc(5, 3); // 8
+```
+
+TypeScript の関数型と C#のデリゲートの主な違いは、デリゲートが型システムの中で明示的に定義される点です。TypeScript では関数は直接変数に代入できますが、C#ではデリゲート型を介して関数参照を行います。
+
+### デリゲートの宣言と使用方法
+
+デリゲート型は以下のように宣言します：
+
+```csharp
+// デリゲートの宣言
+public delegate int Calculate(int x, int y);
+
+// デリゲートの使用例
+public class Calculator
+{
+    public int Add(int x, int y) { return x + y; }
+    public int Subtract(int x, int y) { return x - y; }
+
+    public void UseDelegate()
+    {
+        Calculate calc = Add;  // メソッドの割り当て
+        int result = calc(5, 3);  // メソッドの実行（結果: 8）
+
+        calc = Subtract;  // 別のメソッドに切り替え
+        result = calc(5, 3);  // メソッドの実行（結果: 2）
+    }
+}
+```
+
+TypeScript での同等の実装：
+
+```typescript
+class Calculator {
+    add(x: number, y: number): number {
+        return x + y;
+    }
+    subtract(x: number, y: number): number {
+        return x - y;
+    }
+
+    useFunction(): void {
+        // TypeScriptではメソッド参照時にthisのバインドに注意
+        let calc: (x: number, y: number) => number = this.add.bind(this);
+        let result = calc(5, 3); // 8
+
+        calc = this.subtract.bind(this);
+        result = calc(5, 3); // 2
+    }
+}
+```
+
+### マルチキャストデリゲート
+
+C#のデリゲートは TypeScript にない特徴としてマルチキャスト機能を持ちます。複数のメソッドを一つのデリゲートに登録し、呼び出し時に順番に実行できます：
+
+```csharp
+public delegate void NotifyDelegate(string message);
+
+public class Notification
+{
+    public void SendEmail(string message) { Console.WriteLine($"Email: {message}"); }
+    public void SendSMS(string message) { Console.WriteLine($"SMS: {message}"); }
+
+    public void SetupNotifications()
+    {
+        NotifyDelegate notifier = SendEmail;
+        notifier += SendSMS;  // 複数のメソッドを登録
+
+        notifier("重要なお知らせ");  // 両方のメソッドが順番に実行される
+    }
+}
+```
+
+TypeScript でこれを実現するには、自分で配列を管理する必要があります：
+
+```typescript
+type NotifyFunction = (message: string) => void;
+
+class Notification {
+    sendEmail(message: string): void {
+        console.log(`Email: ${message}`);
+    }
+    sendSMS(message: string): void {
+        console.log(`SMS: ${message}`);
+    }
+
+    setupNotifications(): void {
+        // 関数の配列を作成して管理
+        const notifiers: NotifyFunction[] = [
+            this.sendEmail.bind(this),
+            this.sendSMS.bind(this),
+        ];
+
+        // すべての通知を実行
+        notifiers.forEach((notify) => notify("重要なお知らせ"));
+    }
+}
+```
+
+### ビルトインデリゲート型
+
+C#には、よく使用されるデリゲートパターンをカバーする組み込みデリゲート型があります：
+
+-   `Action<T>`: 戻り値を持たないメソッドを表す（TypeScript の `(param: T) => void` に相当）
+
+    ```csharp
+    Action<string> logger = Console.WriteLine;
+    ```
+
+-   `Func<T, TResult>`: 戻り値を持つメソッドを表す（TypeScript の `(param: T) => TResult` に相当）
+
+    ```csharp
+    Func<int, int, int> add = (x, y) => x + y;
+    ```
+
+-   `Predicate<T>`: bool 型を戻す条件判定用メソッド（TypeScript の `(param: T) => boolean` に相当）
+    ```csharp
+    Predicate<int> isPositive = x => x > 0;
+    ```
+
+TypeScript では型エイリアスで同様の定義が可能です：
+
+```typescript
+// TypeScriptでの同等定義
+type Action<T> = (param: T) => void;
+type Func<T, U, TResult> = (param1: T, param2: U) => TResult;
+type Predicate<T> = (param: T) => boolean;
+
+// 使用例
+const logger: Action<string> = console.log;
+const add: Func<number, number, number> = (x, y) => x + y;
+const isPositive: Predicate<number> = (x) => x > 0;
+```
+
+### 実践的な使用例
+
+#### イベント処理の比較
+
+C#のイベント処理（デリゲートベース）：
+
+```csharp
+// C#でのイベント
+public class Button
+{
+    // イベントはデリゲートベース
+    public event EventHandler Click;
+
+    public void OnClick()
+    {
+        Click?.Invoke(this, EventArgs.Empty);
+    }
+}
+
+// 使用例
+Button button = new Button();
+button.Click += (sender, e) => Console.WriteLine("ボタンがクリックされました");
+```
+
+TypeScript での同等実装：
+
+```typescript
+// TypeScriptでのイベント
+class Button {
+    // イベントリスナーの配列
+    private clickListeners: Array<(event: Event) => void> = [];
+
+    // リスナー追加メソッド
+    addEventListener(listener: (event: Event) => void): void {
+        this.clickListeners.push(listener);
+    }
+
+    // イベント発火
+    onClick(): void {
+        const event = new Event("click");
+        this.clickListeners.forEach((listener) => listener(event));
+    }
+}
+
+// 使用例
+const button = new Button();
+button.addEventListener((event) => console.log("ボタンがクリックされました"));
+```
+
+#### コールバックパターン
+
+C#（デリゲートを使用）：
+
+```csharp
+public void ProcessData(Action<string> callback)
+{
+    // データ処理
+    string result = "処理完了";
+    callback(result);  // 処理完了時にコールバックを実行
+}
+
+// 使用例
+ProcessData(message => Console.WriteLine($"結果: {message}"));
+```
+
+TypeScript（関数を直接渡す）：
+
+```typescript
+function processData(callback: (result: string) => void): void {
+    // データ処理
+    const result = "処理完了";
+    callback(result); // コールバック実行
+}
+
+// 使用例
+processData((message) => console.log(`結果: ${message}`));
+```
+
+### サンプルコード：ストラテジーパターン
+
+C#でのストラテジーパターン（デリゲート版）：
+
+```csharp
+public class SortStrategy
+{
+    public void Sort<T>(List<T> items, Func<T, T, bool> compareStrategy)
+    {
+        // 単純なバブルソート実装
+        for (int i = 0; i < items.Count - 1; i++)
+        {
+            for (int j = 0; j < items.Count - 1 - i; j++)
+            {
+                if (!compareStrategy(items[j], items[j + 1]))
+                {
+                    // 要素の入れ替え
+                    T temp = items[j];
+                    items[j] = items[j + 1];
+                    items[j + 1] = temp;
+                }
+            }
+        }
+    }
+}
+
+// 使用例
+var numbers = new List<int> { 5, 2, 8, 1, 7 };
+var sorter = new SortStrategy();
+
+// 昇順ソート
+sorter.Sort(numbers, (a, b) => a <= b);
+// 結果: [1, 2, 5, 7, 8]
+
+// 降順ソート
+sorter.Sort(numbers, (a, b) => a >= b);
+// 結果: [8, 7, 5, 2, 1]
+```
+
+TypeScript での同等実装：
+
+```typescript
+class SortStrategy {
+    sort<T>(items: T[], compareStrategy: (a: T, b: T) => boolean): void {
+        // 単純なバブルソート実装
+        for (let i = 0; i < items.length - 1; i++) {
+            for (let j = 0; j < items.length - 1 - i; j++) {
+                if (!compareStrategy(items[j], items[j + 1])) {
+                    // 要素の入れ替え
+                    const temp = items[j];
+                    items[j] = items[j + 1];
+                    items[j + 1] = temp;
+                }
+            }
+        }
+    }
+}
+
+// 使用例
+const numbers = [5, 2, 8, 1, 7];
+const sorter = new SortStrategy();
+
+// 昇順ソート
+sorter.sort(numbers, (a, b) => a <= b);
+// 結果: [1, 2, 5, 7, 8]
+
+// 降順ソート
+sorter.sort(numbers, (a, b) => a >= b);
+// 結果: [8, 7, 5, 2, 1]
+```
+
+C#のデリゲートは TypeScript の関数型と似た概念ですが、型システムでの扱い方やマルチキャスト機能など異なる点もあります。TypeScript の関数をファーストクラスオブジェクトとして扱う経験があれば、C#のデリゲートも直感的に理解しやすいでしょう。どちらも関数型プログラミングの要素を取り入れ、柔軟なコード設計を可能にする重要な機能です。

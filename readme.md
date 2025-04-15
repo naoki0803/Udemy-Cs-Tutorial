@@ -1844,3 +1844,200 @@ async function fetchData(): Promise<string> {
     - `IDisposable` インターフェースを実装したクラスで確実なリソース解放を行う
 
 C#の例外処理は TypeScript のそれと概念的には似ていますが、型の階層構造や例外フィルターなど、より細かな制御が可能な点が特徴です。TypeScript の知識を活かしつつ、C#特有の例外処理のパターンを学ぶことで、より堅牢なアプリケーションを作成できるようになります。
+
+## トップレベルステートメントとは
+
+### トップレベルステートメントとは
+
+トップレベルステートメントは、C# 9.0（.NET 5）から導入された機能で、Main メソッドを含むクラスの定義を省略して、プログラムの最上位レベルで直接コードを記述できるようにする機能です。これにより、特に小規模なプログラムやスクリプトのようなコードでは、より簡潔に記述することが可能になりました。
+
+### 言語間の比較: C#、TypeScript、従来の C#
+
+#### TypeScript と JavaScript
+
+元々の設計からファイルの最上位レベルでコードを書くことができます：
+
+```typescript
+// TypeScriptの例 - 最上位レベルでのコード記述
+console.log("Hello, World!");
+
+function add(a: number, b: number): number {
+    return a + b;
+}
+
+const result = add(5, 3);
+console.log(result);
+```
+
+#### 現代の C#（C# 9.0 以降）
+
+トップレベルステートメントを使用することで、TypeScript のような簡潔な記述が可能になりました：
+
+```csharp
+// トップレベルステートメントを使用したC#プログラム
+using System;
+
+Console.WriteLine("Hello, World!");
+int result = Add(5, 3);
+Console.WriteLine(result);
+
+int Add(int a, int b)
+{
+    return a + b;
+}
+```
+
+TypeScript ユーザーにとっては、この新しい C#の記法は馴染みやすく、余分なボイラープレートコードがなくなったことで、より直感的にコードを書くことができるようになりました。
+
+#### 従来の C#（C# 9.0 以前）
+
+クラスと Main メソッドの定義が必須でした：
+
+```csharp
+// 従来のC#プログラム
+using System;
+
+namespace MyApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello, World!");
+            int result = Add(5, 3);
+            Console.WriteLine(result);
+        }
+
+        static int Add(int a, int b)
+        {
+            return a + b;
+        }
+    }
+}
+```
+
+### トップレベルステートメントの特徴
+
+1. **暗黙的な Main メソッド**：
+
+    - コンパイラが自動的に Main メソッドを生成します
+    - コマンドライン引数は`args`という名前の変数で利用可能です
+
+2. **スコープの制約**：
+
+    - 一つのプロジェクトで一つのファイルのみがトップレベルステートメントを持つことができます
+    - 複数のファイルにトップレベルステートメントがあるとコンパイルエラーになります
+
+3. **トップレベルの関数、型、名前空間宣言**：
+    - トップレベルで関数を定義できます
+    - トップレベルステートメントの後にクラスやレコード、構造体などの型定義を記述できます
+    - トップレベルステートメントが含まれるファイルで名前空間を宣言することができます
+
+```csharp
+// トップレベルステートメントと型定義の混在
+using System;
+
+// トップレベルステートメント部分
+Console.WriteLine("プログラム開始");
+var person = new Person("山田", "太郎");
+Console.WriteLine($"こんにちは、{person.FullName}さん");
+
+// トップレベル関数
+string FormatGreeting(string name)
+{
+    return $"こんにちは、{name}さん！";
+}
+
+// 型定義部分
+public class Person
+{
+    public string FirstName { get; }
+    public string LastName { get; }
+
+    public Person(string firstName, string lastName)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+    }
+
+    public string FullName => $"{LastName} {FirstName}";
+}
+```
+
+### 戻り値の指定
+
+トップレベルステートメントでは、`return`文を使用してプログラムの終了コードを指定することができます：
+
+```csharp
+using System;
+
+if (args.Length == 0)
+{
+    Console.WriteLine("引数が指定されていません");
+    return 1; // 終了コード 1 を返す
+}
+
+Console.WriteLine($"引数: {string.Join(", ", args)}");
+return 0; // 正常終了（終了コード 0）
+```
+
+### トップレベルステートメントの利点
+
+1. **コードの簡潔さ**：
+
+    - 小規模なプログラムやユーティリティでの定型コードを削減
+    - 学習者が C#を始める際の理解のハードルを下げる
+
+2. **スクリプト的な使用**：
+
+    - コンソールアプリケーションや小さなユーティリティの開発が容易に
+    - .NET Interactive や Jupyter ノートブックなどでの使用に適している
+
+3. **タスク指向のプログラミング**：
+    - ボイラープレートコードではなく、実際の機能実装に集中できる
+
+### 制限事項と注意点
+
+1. **一つのプロジェクトに一つだけ**：
+
+    - 複数のファイルでトップレベルステートメントを使用することはできない
+
+2. **大規模プロジェクトには向かない**：
+
+    - 大規模な構造化されたアプリケーションには従来の方式が適している
+
+3. **グローバル変数のような振る舞い**：
+    - トップレベルステートメントの変数はファイル内でグローバルに見えるため、大きなプログラムでは混乱の原因になりうる
+
+### 実用的な使用例
+
+**Web スクレイピングのスクリプト：**
+
+```csharp
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+// 非同期のトップレベルステートメントも可能
+await ScrapeWebsiteAsync();
+
+async Task ScrapeWebsiteAsync()
+{
+    using var client = new HttpClient();
+    string url = "https://example.com";
+
+    try
+    {
+        string content = await client.GetStringAsync(url);
+        Console.WriteLine($"取得したコンテンツ長: {content.Length}文字");
+        // ここで内容を解析
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"エラー: {ex.Message}");
+        Environment.Exit(1);
+    }
+}
+```
+
+トップレベルステートメントは、C#をよりモダンでアクセスしやすい言語にするための重要な進化の一つです。TypeScript から C#に移行する開発者にとっては、馴染みやすい構文になっていると言えるでしょう。

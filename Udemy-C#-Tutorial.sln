@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "section14-collection", "sec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "section15-delegate", "section15-delegate\section15-delegate.csproj", "{90144FC1-89AF-466E-A9BA-544D1ED3BB18}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "section15-exception", "section15-exception\section15-exception.csproj", "{93F20811-0354-430A-9900-B5C82CFC7B28}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,18 @@ Global
 		{90144FC1-89AF-466E-A9BA-544D1ED3BB18}.Release|x64.Build.0 = Release|Any CPU
 		{90144FC1-89AF-466E-A9BA-544D1ED3BB18}.Release|x86.ActiveCfg = Release|Any CPU
 		{90144FC1-89AF-466E-A9BA-544D1ED3BB18}.Release|x86.Build.0 = Release|Any CPU
+		{93F20811-0354-430A-9900-B5C82CFC7B28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93F20811-0354-430A-9900-B5C82CFC7B28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93F20811-0354-430A-9900-B5C82CFC7B28}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{93F20811-0354-430A-9900-B5C82CFC7B28}.Debug|x64.Build.0 = Debug|Any CPU
+		{93F20811-0354-430A-9900-B5C82CFC7B28}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{93F20811-0354-430A-9900-B5C82CFC7B28}.Debug|x86.Build.0 = Debug|Any CPU
+		{93F20811-0354-430A-9900-B5C82CFC7B28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93F20811-0354-430A-9900-B5C82CFC7B28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93F20811-0354-430A-9900-B5C82CFC7B28}.Release|x64.ActiveCfg = Release|Any CPU
+		{93F20811-0354-430A-9900-B5C82CFC7B28}.Release|x64.Build.0 = Release|Any CPU
+		{93F20811-0354-430A-9900-B5C82CFC7B28}.Release|x86.ActiveCfg = Release|Any CPU
+		{93F20811-0354-430A-9900-B5C82CFC7B28}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

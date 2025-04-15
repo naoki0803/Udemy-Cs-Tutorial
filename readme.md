@@ -1537,3 +1537,310 @@ sorter.sort(numbers, (a, b) => a >= b);
 ```
 
 C#のデリゲートは TypeScript の関数型と似た概念ですが、型システムでの扱い方やマルチキャスト機能など異なる点もあります。TypeScript の関数をファーストクラスオブジェクトとして扱う経験があれば、C#のデリゲートも直感的に理解しやすいでしょう。どちらも関数型プログラミングの要素を取り入れ、柔軟なコード設計を可能にする重要な機能です。
+
+## 例外処理
+
+### 例外処理とは
+
+例外処理は、プログラム実行中に発生する予期しないエラーや異常な状態を検出し、適切に対応するための仕組みです。C#の例外処理は、TypeScript の例外処理と基本的な概念は似ていますが、特有の機能や構文の違いがあります。
+
+### C#と TypeScript の例外処理の比較
+
+#### 基本構文
+
+C#の例外処理基本構文：
+
+```csharp
+try
+{
+    // 例外が発生する可能性のあるコード
+    int result = 10 / 0; // ゼロ除算例外が発生
+}
+catch (DivideByZeroException ex)
+{
+    // 特定の例外をキャッチ
+    Console.WriteLine($"ゼロ除算エラー: {ex.Message}");
+}
+catch (Exception ex)
+{
+    // その他のすべての例外をキャッチ
+    Console.WriteLine($"エラーが発生しました: {ex.Message}");
+}
+finally
+{
+    // 例外の有無にかかわらず実行されるコード
+    Console.WriteLine("処理を終了します");
+}
+```
+
+TypeScript の例外処理基本構文：
+
+```typescript
+try {
+    // 例外が発生する可能性のあるコード
+    const result = 10 / 0; // JavaScriptではInfinityとなり例外は発生しない
+    throw new Error("例外のデモ");
+} catch (error) {
+    // TypeScriptでは例外の型を区別しづらい
+    console.log(`エラーが発生しました: ${error.message}`);
+} finally {
+    // 例外の有無にかかわらず実行されるコード
+    console.log("処理を終了します");
+}
+```
+
+### C#の例外処理の特徴
+
+#### 1. 型階層による例外の区別
+
+C#では、例外は `System.Exception` クラスから派生した型階層を持ちます。これにより、発生した例外の種類に応じて異なる処理が可能です：
+
+```csharp
+try
+{
+    using (StreamReader file = new StreamReader("存在しないファイル.txt"))
+    {
+        string content = file.ReadToEnd();
+    }
+}
+catch (FileNotFoundException ex)
+{
+    Console.WriteLine($"ファイルが見つかりません: {ex.FileName}");
+}
+catch (IOException ex)
+{
+    Console.WriteLine($"入出力エラー: {ex.Message}");
+}
+```
+
+TypeScript では例外の型階層が弱く、通常は `instanceof` を使って例外の種類を判別します：
+
+```typescript
+try {
+    // ファイル操作など
+} catch (error) {
+    if (error instanceof TypeError) {
+        console.log("型エラーです");
+    } else {
+        console.log("その他のエラーです");
+    }
+}
+```
+
+#### 2. 例外フィルター (C# 6.0 以降)
+
+C#では when キーワードを使用して例外フィルターを定義できます：
+
+```csharp
+try
+{
+    int number = int.Parse("abc");
+}
+catch (FormatException ex) when (DateTime.Now.DayOfWeek == DayOfWeek.Monday)
+{
+    Console.WriteLine("月曜日に発生したフォーマットエラー");
+}
+catch (FormatException ex)
+{
+    Console.WriteLine("通常のフォーマットエラー");
+}
+```
+
+TypeScript にはこの機能に直接対応するものはなく、catch ブロック内で条件分岐を行う必要があります。
+
+#### 3. カスタム例外の定義
+
+C#でカスタム例外を定義する場合：
+
+```csharp
+// カスタム例外クラスの定義
+public class UserNotFoundException : Exception
+{
+    public string Username { get; }
+
+    public UserNotFoundException(string username)
+        : base($"ユーザー '{username}' が見つかりませんでした")
+    {
+        Username = username;
+    }
+}
+
+// 使用例
+try
+{
+    string username = "admin";
+    bool exists = false;
+
+    if (!exists)
+    {
+        throw new UserNotFoundException(username);
+    }
+}
+catch (UserNotFoundException ex)
+{
+    Console.WriteLine($"エラー: {ex.Message}, ユーザー名: {ex.Username}");
+}
+```
+
+TypeScript でのカスタム例外の例：
+
+```typescript
+class UserNotFoundException extends Error {
+    username: string;
+
+    constructor(username: string) {
+        super(`ユーザー '${username}' が見つかりませんでした`);
+        this.name = "UserNotFoundException";
+        this.username = username;
+    }
+}
+
+try {
+    const username = "admin";
+    const exists = false;
+
+    if (!exists) {
+        throw new UserNotFoundException(username);
+    }
+} catch (error) {
+    if (error instanceof UserNotFoundException) {
+        console.log(`エラー: ${error.message}, ユーザー名: ${error.username}`);
+    }
+}
+```
+
+### 例外処理のベストプラクティス
+
+#### 1. 例外の捕捉と再スロー
+
+より詳細な情報を追加して例外を再スローする方法：
+
+```csharp
+try
+{
+    // リソースへのアクセス
+}
+catch (Exception ex)
+{
+    // ログ記録
+    Logger.Log(ex);
+
+    // 追加情報を含めて再スロー
+    throw new ApplicationException("データベース接続中にエラーが発生しました", ex);
+}
+```
+
+TypeScript での同様の処理：
+
+```typescript
+try {
+    // リソースへのアクセス
+} catch (error) {
+    // ログ記録
+    logger.log(error);
+
+    // 新しい例外を作成して元の例外を含める
+    const newError = new Error("データベース接続中にエラーが発生しました");
+    newError.cause = error; // ES2022の機能
+    throw newError;
+}
+```
+
+#### 2. リソース管理 (IDisposable と using)
+
+C#では、`using` ステートメントを使用してリソースの確実な解放を実現します：
+
+```csharp
+try
+{
+    using (SqlConnection connection = new SqlConnection(connectionString))
+    {
+        connection.Open();
+        // データベース処理
+    } // ここで自動的に connection.Dispose() が呼ばれる
+}
+catch (SqlException ex)
+{
+    Console.WriteLine($"SQLエラー: {ex.Message}");
+}
+```
+
+TypeScript には直接対応する機能はなく、通常は try/finally または明示的なクローズ処理を実装します：
+
+```typescript
+let connection = null;
+try {
+    connection = new DatabaseConnection();
+    connection.open();
+    // データベース処理
+} catch (error) {
+    console.log(`データベースエラー: ${error.message}`);
+} finally {
+    if (connection) {
+        connection.close();
+    }
+}
+```
+
+#### 3. 非同期処理での例外処理
+
+C#の async/await での例外処理：
+
+```csharp
+public async Task<string> FetchDataAsync()
+{
+    try
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            string response = await client.GetStringAsync("https://api.example.com/data");
+            return response;
+        }
+    }
+    catch (HttpRequestException ex)
+    {
+        Console.WriteLine($"HTTP要求エラー: {ex.Message}");
+        return null;
+    }
+}
+```
+
+TypeScript での非同期例外処理：
+
+```typescript
+async function fetchData(): Promise<string> {
+    try {
+        const response = await fetch("https://api.example.com/data");
+        if (!response.ok) {
+            throw new Error(`HTTP error ${response.status}`);
+        }
+        return await response.text();
+    } catch (error) {
+        console.log(`取得エラー: ${error.message}`);
+        return null;
+    }
+}
+```
+
+### 注意点とガイドライン
+
+1. **例外を適切に使用する**:
+
+    - 例外は予期しない状況やエラー処理のためのものであり、通常のフロー制御には使用しない
+    - パフォーマンスへの影響を考慮する（例外処理はコストが高い操作）
+
+2. **具体的な例外をキャッチする**:
+
+    - `catch (Exception)` のような一般的な例外捕捉より、具体的な例外型を指定する
+    - 複数の catch ブロックを使い、例外タイプごとに適切な対応を行う
+
+3. **例外情報の保持**:
+
+    - 例外を再スローする場合は `throw;` を使用して、スタックトレース情報を保持する
+    - `throw ex;` は新しいスタックトレースを生成し、元の情報が失われる
+
+4. **リソースの解放を保証する**:
+    - リソースを使用する場合は、`using` ステートメントや `try-finally` パターンを活用する
+    - `IDisposable` インターフェースを実装したクラスで確実なリソース解放を行う
+
+C#の例外処理は TypeScript のそれと概念的には似ていますが、型の階層構造や例外フィルターなど、より細かな制御が可能な点が特徴です。TypeScript の知識を活かしつつ、C#特有の例外処理のパターンを学ぶことで、より堅牢なアプリケーションを作成できるようになります。
